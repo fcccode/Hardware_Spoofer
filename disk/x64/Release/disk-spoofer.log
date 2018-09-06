@@ -1,5 +1,5 @@
-﻿  Building 'fag' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: Das Zwischenverzeichnis (x64\Release\) enthält freigegebene Dateien aus einem anderen Projekt (driver-disk.vcxproj). Dies kann zu einem falschen Bereinigungs- und Neuerstellungsverhalten führen.
+﻿  Building 'driver-disk' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: Das Zwischenverzeichnis (x64\Release\) enthält freigegebene Dateien aus einem anderen Projekt (fag.vcxproj). Dies kann zu einem falschen Bereinigungs- und Neuerstellungsverhalten führen.
   Microsoft (R) C/C++-Optimierungscompiler Version 19.14.26429.4 für x64
   Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
   
@@ -11,57 +11,11 @@ c:\users\finn\documents\github\hardware_spoofer\disk\main.c(219): warning C4311:
   Microsoft (R) Incremental Linker Version 14.14.26429.4
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-  "/OUT:C:\Users\Finn\Documents\GitHub\Hardware_Spoofer\x64\Release\fag.sys" "/VERSION:10.0" /INCREMENTAL:NO /WX "/SECTION:INIT,d" "C:\Program Files (x86)\Windows Kits\10\lib\10.0.17134.0\km\x64\BufferOverflowFastFailK.lib" "C:\Program Files (x86)\Windows Kits\10\lib\10.0.17134.0\km\x64\ntoskrnl.lib" "C:\Program Files (x86)\Windows Kits\10\lib\10.0.17134.0\km\x64\hal.lib" "C:\Program Files (x86)\Windows Kits\10\lib\10.0.17134.0\km\x64\wmilib.lib" "C:\Program Files (x86)\Windows Kits\10\lib\wdf\kmdf\x64\1.15\WdfLdr.lib" "C:\Program Files (x86)\Windows Kits\10\lib\wdf\kmdf\x64\1.15\WdfDriverEntry.lib" /NODEFAULTLIB /MANIFEST:NO "/PDB:C:\Users\Finn\Documents\GitHub\Hardware_Spoofer\x64\Release\fag.pdb" /MAP /MAPINFO:EXPORTS "/SUBSYSTEM:NATIVE,10.00" /LARGEADDRESSAWARE /Driver /OPT:REF /OPT:ICF "/ENTRY:DriverEntry" /RELEASE /DYNAMICBASE /NXCOMPAT "/IMPLIB:C:\Users\Finn\Documents\GitHub\Hardware_Spoofer\x64\Release\fag.lib" "/MERGE:_TEXT=.text;_PAGE=PAGE" /MACHINE:X64 /kernel /IGNORE:4198,4010,4037,4039,4065,4070,4078,4087,4089,4221,4108,4088,4218,4218,4235 /osversion:10.0 /pdbcompress /debugtype:pdata x64\Release\main.obj 
-  disk-spoofer.vcxproj -> C:\Users\Finn\Documents\GitHub\Hardware_Spoofer\x64\Release\fag.sys
+  "/OUT:C:\Users\Finn\Documents\GitHub\Hardware_Spoofer\x64\Release\driver-disk.sys" "/VERSION:10.0" /INCREMENTAL:NO /WX "/SECTION:INIT,d" "C:\Program Files (x86)\Windows Kits\10\lib\10.0.17134.0\km\x64\BufferOverflowFastFailK.lib" "C:\Program Files (x86)\Windows Kits\10\lib\10.0.17134.0\km\x64\ntoskrnl.lib" "C:\Program Files (x86)\Windows Kits\10\lib\10.0.17134.0\km\x64\hal.lib" "C:\Program Files (x86)\Windows Kits\10\lib\10.0.17134.0\km\x64\wmilib.lib" "C:\Program Files (x86)\Windows Kits\10\lib\wdf\kmdf\x64\1.15\WdfLdr.lib" "C:\Program Files (x86)\Windows Kits\10\lib\wdf\kmdf\x64\1.15\WdfDriverEntry.lib" /NODEFAULTLIB /MANIFEST:NO "/PDB:C:\Users\Finn\Documents\GitHub\Hardware_Spoofer\x64\Release\driver-disk.pdb" /MAP /MAPINFO:EXPORTS "/SUBSYSTEM:NATIVE,10.00" /LARGEADDRESSAWARE /Driver /OPT:REF /OPT:ICF "/ENTRY:DriverEntry" /RELEASE /DYNAMICBASE /NXCOMPAT "/IMPLIB:C:\Users\Finn\Documents\GitHub\Hardware_Spoofer\x64\Release\driver-disk.lib" "/MERGE:_TEXT=.text;_PAGE=PAGE" /MACHINE:X64 /kernel /IGNORE:4198,4010,4037,4039,4065,4070,4078,4087,4089,4221,4108,4088,4218,4218,4235 /osversion:10.0 /pdbcompress /debugtype:pdata x64\Release\main.obj 
+  disk-spoofer.vcxproj -> C:\Users\Finn\Documents\GitHub\Hardware_Spoofer\x64\Release\driver-disk.sys
   Done Adding Additional Store
-  Successfully signed: C:\Users\Finn\Documents\GitHub\Hardware_Spoofer\x64\Release\fag.sys
+  Successfully signed: C:\Users\Finn\Documents\GitHub\Hardware_Spoofer\x64\Release\driver-disk.sys
   
-ApiValidation : warning : API _CxxThrowException in vcruntime140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API __C_specific_handler in vcruntime140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API __CxxFrameHandler3 in vcruntime140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API __std_exception_copy in vcruntime140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API __std_exception_destroy in vcruntime140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API __std_terminate in vcruntime140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API __std_type_info_compare in vcruntime140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API _purecall in vcruntime140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API memcmp in vcruntime140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API memcpy in vcruntime140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API memmove in vcruntime140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API memset in vcruntime140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ??0?$basic_ios@DU?$char_traits@D@std@@@std@@IEAA@XZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ??0?$basic_istream@DU?$char_traits@D@std@@@std@@QEAA@PEAV?$basic_streambuf@DU?$char_traits@D@std@@@1@_N@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ??0?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAA@PEAV?$basic_streambuf@DU?$char_traits@D@std@@@1@_N@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ??0?$basic_streambuf@DU?$char_traits@D@std@@@std@@IEAA@XZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ??0_Lockit@std@@QEAA@H@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ??1?$basic_ios@DU?$char_traits@D@std@@@std@@UEAA@XZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ??1?$basic_istream@DU?$char_traits@D@std@@@std@@UEAA@XZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ??1?$basic_ostream@DU?$char_traits@D@std@@@std@@UEAA@XZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ??1?$basic_streambuf@DU?$char_traits@D@std@@@std@@UEAA@XZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ??1_Lockit@std@@QEAA@XZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ??Bid@locale@std@@QEAA_KXZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?_BADOFF@std@@3_JB in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?_Fiopen@std@@YAPEAU_iobuf@@PEBDHH@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?_Fiopen@std@@YAPEAU_iobuf@@PEB_WHH@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?_Getcat@?$codecvt@DDU_Mbstatet@@@std@@SA_KPEAPEBVfacet@locale@2@PEBV42@@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?_Getgloballocale@locale@std@@CAPEAV_Locimp@12@XZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?_Gndec@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IEAAPEADXZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?_Init@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IEAAXXZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?_Ipfx@?$basic_istream@DU?$char_traits@D@std@@@std@@QEAA_N_N@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?_Xbad_function_call@std@@YAXXZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?_Xlength_error@std@@YAXPEBD@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?_Xout_of_range@std@@YAXPEBD@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?always_noconv@codecvt_base@std@@QEBA_NXZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?getloc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QEBA?AVlocale@2@XZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?id@?$codecvt@DDU_Mbstatet@@@std@@2V0locale@2@A in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?in@?$codecvt@DDU_Mbstatet@@@std@@QEBAHAEAU_Mbstatet@@PEBD1AEAPEBDPEAD3AEAPEAD@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?out@?$codecvt@DDU_Mbstatet@@@std@@QEBAHAEAU_Mbstatet@@PEBD1AEAPEBDPEAD3AEAPEAD@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?sbumpc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QEAAHXZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?seekg@?$basic_istream@DU?$char_traits@D@std@@@std@@QEAAAEAV12@_JH@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?setstate@?$basic_ios@DU?$char_traits@D@std@@@std@@QEAAXH_N@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?showmanyc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MEAA_JXZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?tellg@?$basic_istream@DU?$char_traits@D@std@@@std@@QEAA?AV?$fpos@U_Mbstatet@@@2@XZ in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?unshift@?$codecvt@DDU_Mbstatet@@@std@@QEBAHAEAU_Mbstatet@@PEAD1AEAPEAD@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?write@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV12@PEBD_J@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?xsgetn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MEAA_JPEAD_J@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-ApiValidation : warning : API ?xsputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MEAA_JPEBD_J@Z in msvcp140.dll is not a supported universal API. drvmap.exe calls this API.
-C:\Program Files (x86)\Windows Kits\10\build\WindowsDriver.common.targets(1770,5): error MSB3721: Der Befehl ""C:\Program Files (x86)\Windows Kits\10\bin\10.0.17134.0\x64\ApiValidator.exe" -DriverPackagePath:C:\Users\Finn\Documents\GitHub\Hardware_Spoofer\x64\Release\ -SupportedApiXmlFiles:"C:\Program Files (x86)\Windows Kits\10\build\universalDDIs\x64\UniversalDDIs.xml" -ModuleWhiteListXmlFiles:"C:\Program Files (x86)\Windows Kits\10\build\universalDDIs\x64\ModuleWhiteList.xml" -ApiExtractorExePath:"C:\Program Files (x86)\Windows Kits\10\bin\10.0.17134.0\x64"" wurde mit Code -1 beendet.
+  Driver is a Universal Driver.
+  Inf2Cat task was skipped as there were no inf files to process
+  

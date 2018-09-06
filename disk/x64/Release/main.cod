@@ -33,6 +33,7 @@ EXTRN	__imp_KeQuerySystemTimePrecise:PROC
 EXTRN	__imp_ExAllocatePool:PROC
 EXTRN	__imp_ExFreePoolWithTag:PROC
 EXTRN	__imp_IofCompleteRequest:PROC
+EXTRN	__imp_RtlRandomEx:PROC
 EXTRN	__imp_ObReferenceObjectByName:PROC
 EXTRN	__imp_IoDriverObjectType:QWORD
 ;	COMDAT pdata
@@ -43,8 +44,8 @@ $pdata$GetDriverObject DD imagerel $LN5
 pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
-$pdata$SpoofSerialNumber DD imagerel $LN15
-	DD	imagerel $LN15+95
+$pdata$SpoofSerialNumber DD imagerel $LN19
+	DD	imagerel $LN19+280
 	DD	imagerel $unwind$SpoofSerialNumber
 pdata	ENDS
 ;	COMDAT pdata
@@ -147,9 +148,13 @@ $unwind$StorageQueryCompletionRoutine DD 0c1802H
 xdata	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
-$unwind$SpoofSerialNumber DD 040602H
-	DD	06001602H
-	DD	030023206H
+$unwind$SpoofSerialNumber DD 0c1902H
+	DD	06001607H
+	DD	0b7419H
+	DD	0a6419H
+	DD	083419H
+	DD	0f0153219H
+	DD	0c011e013H
 xdata	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
@@ -696,23 +701,29 @@ _TEXT	ENDS
 ; File c:\users\finn\documents\github\hardware_spoofer\disk\main.c
 ;	COMDAT SpoofSerialNumber
 _TEXT	SEGMENT
-serialNumber$ = 48
-tv193 = 56
-Seed$1 = 56
+serialNumber$ = 64
+Seed$1 = 72
 SpoofSerialNumber PROC					; COMDAT
 
 ; 45   : {
 
-$LN15:
-  00000	40 53		 push	 rbx
-  00002	48 83 ec 20	 sub	 rsp, 32			; 00000020H
+$LN19:
+  00000	48 8b c4	 mov	 rax, rsp
+  00003	48 89 58 08	 mov	 QWORD PTR [rax+8], rbx
+  00007	48 89 70 18	 mov	 QWORD PTR [rax+24], rsi
+  0000b	48 89 78 20	 mov	 QWORD PTR [rax+32], rdi
+  0000f	41 54		 push	 r12
+  00011	41 56		 push	 r14
+  00013	41 57		 push	 r15
+  00015	48 83 ec 20	 sub	 rsp, 32			; 00000020H
 
 ; 46   : 	if (!HWIDGenerated)
 
-  00006	83 3d 00 00 00
+  00019	83 3d 00 00 00
 	00 00		 cmp	 DWORD PTR HWIDGenerated, 0
-  0000d	48 8b d9	 mov	 rbx, rcx
-  00010	75 45		 jne	 SHORT $LN5@SpoofSeria
+  00020	48 8b f9	 mov	 rdi, rcx
+  00023	0f 85 d3 00 00
+	00		 jne	 $LN5@SpoofSeria
 
 ; 47   : 	{
 ; 48   : 		HWIDGenerated = 1;
@@ -720,60 +731,127 @@ $LN15:
 ; 50   : 		LARGE_INTEGER Seed;
 ; 51   : 		KeQuerySystemTimePrecise(&Seed);
 
-  00012	48 8d 4c 24 38	 lea	 rcx, QWORD PTR Seed$1[rsp]
-  00017	c7 05 00 00 00
+  00029	48 8d 48 10	 lea	 rcx, QWORD PTR [rax+16]
+  0002d	c7 05 00 00 00
 	00 01 00 00 00	 mov	 DWORD PTR HWIDGenerated, 1
-  00021	ff 15 00 00 00
+  00037	ff 15 00 00 00
 	00		 call	 QWORD PTR __imp_KeQuerySystemTimePrecise
 
 ; 52   : 
 ; 53   : 		for (int i = 0; i < strlen(SpoofedHWID); ++i)
 
-  00027	48 8d 0d 00 00
-	00 00		 lea	 rcx, OFFSET FLAT:SpoofedHWID
-  0002e	48 83 c8 ff	 or	 rax, -1
-$LL13@SpoofSeria:
-  00032	48 ff c0	 inc	 rax
-  00035	80 3c 01 00	 cmp	 BYTE PTR [rcx+rax], 0
-  00039	75 f7		 jne	 SHORT $LL13@SpoofSeria
+  0003d	33 f6		 xor	 esi, esi
+  0003f	4c 8d 35 00 00
+	00 00		 lea	 r14, OFFSET FLAT:SpoofedHWID
+  00046	49 83 cf ff	 or	 r15, -1
+  0004a	49 8b c7	 mov	 rax, r15
+$LL17@SpoofSeria:
+  0004d	48 ff c0	 inc	 rax
+  00050	41 38 34 06	 cmp	 BYTE PTR [r14+rax], sil
+  00054	75 f7		 jne	 SHORT $LL17@SpoofSeria
+  00056	48 85 c0	 test	 rax, rax
+  00059	0f 84 81 00 00
+	00		 je	 $LN3@SpoofSeria
+  0005f	49 8b de	 mov	 rbx, r14
+  00062	4c 8d 25 00 00
+	00 00		 lea	 r12, OFFSET FLAT:NumTable
+$LL4@SpoofSeria:
 
 ; 54   : 		{
 ; 55   : 
-; 56   : 			if (SpoofedHWID[i] == 'ABC')
+; 56   : 			if (SpoofedHWID[i] == 'Y')
+
+  00069	44 8a 03	 mov	 r8b, BYTE PTR [rbx]
+  0006c	41 80 f8 59	 cmp	 r8b, 89			; 00000059H
+  00070	75 26		 jne	 SHORT $LN13@SpoofSeria
+
 ; 57   : 			{
 ; 58   : 				SpoofedHWID[i] = RtlRandomEx(&Seed.LowPart) % 26 + 65;
+
+  00072	48 8d 4c 24 48	 lea	 rcx, QWORD PTR Seed$1[rsp]
+  00077	ff 15 00 00 00
+	00		 call	 QWORD PTR __imp_RtlRandomEx
+  0007d	44 8b c0	 mov	 r8d, eax
+  00080	b8 4f ec c4 4e	 mov	 eax, 1321528399		; 4ec4ec4fH
+  00085	41 f7 e0	 mul	 r8d
+  00088	c1 ea 03	 shr	 edx, 3
+  0008b	6b ca 1a	 imul	 ecx, edx, 26
+  0008e	44 2b c1	 sub	 r8d, ecx
+  00091	41 80 c0 41	 add	 r8b, 65			; 00000041H
+  00095	44 88 03	 mov	 BYTE PTR [rbx], r8b
+$LN13@SpoofSeria:
+
 ; 59   : 
 ; 60   : 			}
 ; 61   : 
-; 62   : 			if (SpoofedHWID[i] == 'DEF')
+; 62   : 			if (SpoofedHWID[i] == 'X')
+
+  00098	41 80 f8 58	 cmp	 r8b, 88			; 00000058H
+  0009c	75 28		 jne	 SHORT $LN2@SpoofSeria
+
 ; 63   : 			{
 ; 64   : 				SpoofedHWID[i] = NumTable[RtlRandomEx(&Seed.LowPart) % (strlen(NumTable) - 1)];
+
+  0009e	48 8d 4c 24 48	 lea	 rcx, QWORD PTR Seed$1[rsp]
+  000a3	ff 15 00 00 00
+	00		 call	 QWORD PTR __imp_RtlRandomEx
+  000a9	8b c0		 mov	 eax, eax
+  000ab	49 8b cf	 mov	 rcx, r15
+$LL16@SpoofSeria:
+  000ae	48 ff c1	 inc	 rcx
+  000b1	41 80 3c 0c 00	 cmp	 BYTE PTR [r12+rcx], 0
+  000b6	75 f6		 jne	 SHORT $LL16@SpoofSeria
+  000b8	48 ff c9	 dec	 rcx
+  000bb	33 d2		 xor	 edx, edx
+  000bd	48 f7 f1	 div	 rcx
+  000c0	42 8a 04 22	 mov	 al, BYTE PTR [rdx+r12]
+  000c4	88 03		 mov	 BYTE PTR [rbx], al
+$LN2@SpoofSeria:
+
+; 52   : 
+; 53   : 		for (int i = 0; i < strlen(SpoofedHWID); ++i)
+
+  000c6	ff c6		 inc	 esi
+  000c8	49 8b cf	 mov	 rcx, r15
+  000cb	48 ff c3	 inc	 rbx
+$LL15@SpoofSeria:
+  000ce	48 ff c1	 inc	 rcx
+  000d1	41 80 3c 0e 00	 cmp	 BYTE PTR [r14+rcx], 0
+  000d6	75 f6		 jne	 SHORT $LL15@SpoofSeria
+  000d8	48 63 c6	 movsxd	 rax, esi
+  000db	48 3b c1	 cmp	 rax, rcx
+  000de	72 89		 jb	 SHORT $LL4@SpoofSeria
+$LN3@SpoofSeria:
+
 ; 65   : 			}
 ; 66   : 		}
 ; 67   : 
 ; 68   : 		RtlCopyMemory((void*)serialNumber, (void*)SpoofedHWID, 21);
 
-  0003b	0f 10 05 00 00
+  000e0	0f 10 05 00 00
 	00 00		 movups	 xmm0, XMMWORD PTR SpoofedHWID
-  00042	0f 11 03	 movups	 XMMWORD PTR [rbx], xmm0
-  00045	8b 05 10 00 00
+  000e7	0f 11 07	 movups	 XMMWORD PTR [rdi], xmm0
+  000ea	8b 05 10 00 00
 	00		 mov	 eax, DWORD PTR SpoofedHWID+16
-  0004b	89 43 10	 mov	 DWORD PTR [rbx+16], eax
-  0004e	8a 05 14 00 00
+  000f0	89 47 10	 mov	 DWORD PTR [rdi+16], eax
+  000f3	8a 05 14 00 00
 	00		 mov	 al, BYTE PTR SpoofedHWID+20
-  00054	88 43 14	 mov	 BYTE PTR [rbx+20], al
+  000f9	88 47 14	 mov	 BYTE PTR [rdi+20], al
 $LN5@SpoofSeria:
 
 ; 69   : 	}
 ; 70   : 	return STATUS_SUCCESS;
-
-  00057	33 c0		 xor	 eax, eax
-
 ; 71   : }
 
-  00059	48 83 c4 20	 add	 rsp, 32			; 00000020H
-  0005d	5b		 pop	 rbx
-  0005e	c3		 ret	 0
+  000fc	48 8b 5c 24 40	 mov	 rbx, QWORD PTR [rsp+64]
+  00101	33 c0		 xor	 eax, eax
+  00103	48 8b 74 24 50	 mov	 rsi, QWORD PTR [rsp+80]
+  00108	48 8b 7c 24 58	 mov	 rdi, QWORD PTR [rsp+88]
+  0010d	48 83 c4 20	 add	 rsp, 32			; 00000020H
+  00111	41 5f		 pop	 r15
+  00113	41 5e		 pop	 r14
+  00115	41 5c		 pop	 r12
+  00117	c3		 ret	 0
 SpoofSerialNumber ENDP
 _TEXT	ENDS
 ; Function compile flags: /Ogsp
