@@ -1,0 +1,257 @@
+﻿  Building 'driver-disk' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  main.c
+c:\program files (x86)\windows kits\10\include\10.0.17134.0\km\wdm.h(18400): error C4013: "_DataSynchronizationBarrier" undefiniert; Annahme: extern mit Rückgabetyp int
+c:\program files (x86)\windows kits\10\include\10.0.17134.0\km\wdm.h(18767): error C4013: "_MoveFromCoprocessor" undefiniert; Annahme: extern mit Rückgabetyp int
+c:\program files (x86)\windows kits\10\include\10.0.17134.0\km\wdm.h(18767): error C2065: "CP15_TPIDRPRW": nichtdeklarierter Bezeichner
+c:\program files (x86)\windows kits\10\include\10.0.17134.0\km\wdm.h(18799): error C4013: "MemoryBarrier" undefiniert; Annahme: extern mit Rückgabetyp int
+c:\program files (x86)\windows kits\10\include\10.0.17134.0\km\wdm.h(22244): error C4013: "DbgRaiseAssertionFailure" undefiniert; Annahme: extern mit Rückgabetyp int
+c:\program files (x86)\windows kits\10\include\10.0.17134.0\km\wdm.h(31388): error C4013: "InterlockedExchangePointer" undefiniert; Annahme: extern mit Rückgabetyp int
+c:\users\finn\documents\github\hwidfaker\disk\main.c(35): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(26): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(55): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(35): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(177): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(77): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(184): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(75): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(185): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(297): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(195): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(298): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(408): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(311): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(417): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(307): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(418): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(529): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(427): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(530): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(531): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(429): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(549): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(553): warning C4130: "==": Logische Operation mit Adresse einer Zeichenfolgenkonstanten
+c:\users\finn\documents\github\hwidfaker\disk\main.c(557): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(619): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(623): warning C4130: "==": Logische Operation mit Adresse einer Zeichenfolgenkonstanten
+c:\users\finn\documents\github\hwidfaker\disk\main.c(669): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(688): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(692): warning C4130: "==": Logische Operation mit Adresse einer Zeichenfolgenkonstanten
+c:\users\finn\documents\github\hwidfaker\disk\main.c(738): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(799): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(803): warning C4130: "==": Logische Operation mit Adresse einer Zeichenfolgenkonstanten
+c:\users\finn\documents\github\hwidfaker\disk\main.c(807): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(868): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(872): warning C4130: "==": Logische Operation mit Adresse einer Zeichenfolgenkonstanten
+c:\users\finn\documents\github\hwidfaker\disk\main.c(876): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(895): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(941): warning C4130: "==": Logische Operation mit Adresse einer Zeichenfolgenkonstanten
+c:\users\finn\documents\github\hwidfaker\disk\main.c(945): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(964): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1010): warning C4130: "==": Logische Operation mit Adresse einer Zeichenfolgenkonstanten
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1014): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1033): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1079): warning C4130: "==": Logische Operation mit Adresse einer Zeichenfolgenkonstanten
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1083): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1103): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1149): warning C4130: "==": Logische Operation mit Adresse einer Zeichenfolgenkonstanten
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1153): warning C4242: "=": Konvertierung von "BOOL" in "BOOLEAN", möglicher Datenverlust
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1231): warning C4456: Deklaration von "SamenAmen2" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1176): note: Siehe Deklaration von "SamenAmen2"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1275): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1171): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1276): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1218): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1283): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1349): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1298): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1403): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1349): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1452): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1292): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1453): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1521): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1468): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1573): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1521): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1622): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1462): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1623): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1701): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1640): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1753): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1632): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1758): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1701): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1760): warning C4456: Deklaration von "hurensohnxd" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1755): note: Siehe Deklaration von "hurensohnxd"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1804): warning C4456: Deklaration von "kleinerlappen" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1757): note: Siehe Deklaration von "kleinerlappen"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1810): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1875): warning C4456: Deklaration von "SamenAmen2" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1820): note: Siehe Deklaration von "SamenAmen2"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1917): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1862): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(1979): warning C4456: Deklaration von "SamenAmen2" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1875): note: Siehe Deklaration von "SamenAmen2"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2025): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(1819): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2026): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2056): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2042): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2066): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2035): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2067): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2056): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2074): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2105): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2088): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2119): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2083): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2120): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2143): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2129): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2144): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2166): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2152): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2167): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2191): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2177): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2192): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2214): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2201): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2216): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2239): warning C4456: Deklaration von "fickdichsmurf" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2226): note: Siehe Deklaration von "fickdichsmurf"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2240): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2271): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2304): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2295): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2313): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2304): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2323): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2340): warning C4456: Deklaration von "gay" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2255): note: Siehe Deklaration von "gay"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2341): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2332): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2398): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2380): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2408): warning C4305: "=": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2430): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2441): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2445): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2448): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2380): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2409): warning C4305: "Initialisierung": Verkürzung von "__int64" in "int"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2477): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2503): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2540): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2560): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2583): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2597): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2615): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2630): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2640): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2632): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2651): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2666): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2691): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2693): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2682): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2706): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2707): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2682): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2715): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2716): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2707): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2733): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2735): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2682): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2762): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2782): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2797): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2803): warning C4456: Deklaration von "gay" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2761): note: Siehe Deklaration von "gay"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2804): warning C4456: Deklaration von "jew" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2775): note: Siehe Deklaration von "jew"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2848): warning C4456: Deklaration von "gay" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2831): note: Siehe Deklaration von "gay"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2849): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2833): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2856): warning C4456: Deklaration von "jew" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2832): note: Siehe Deklaration von "jew"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2860): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2867): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2868): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2849): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2882): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2886): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2849): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2933): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2920): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2940): warning C4456: Deklaration von "gay" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2918): note: Siehe Deklaration von "gay"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2941): warning C4456: Deklaration von "jew" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2919): note: Siehe Deklaration von "jew"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2945): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2948): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2933): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2959): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2960): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2933): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(2989): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3000): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(2991): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3024): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3025): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3014): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3038): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3040): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3014): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3048): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3040): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3091): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3093): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3076): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3120): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3128): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3131): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3076): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3142): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3178): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3179): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3165): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3193): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3195): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3165): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3206): warning C4456: Deklaration von "gay" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3163): note: Siehe Deklaration von "gay"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3207): warning C4456: Deklaration von "jew" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3164): note: Siehe Deklaration von "jew"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3211): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3214): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3215): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3165): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3230): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3165): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3264): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3283): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3301): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3347): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3475): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3507): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3516): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3518): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3529): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3533): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3353): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3534): warning C4456: Deklaration von "SamenAmen2" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3371): note: Siehe Deklaration von "SamenAmen2"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3585): warning C4127: Bedingter Ausdruck ist konstant
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3587): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3353): note: Siehe Deklaration von "gayniggaasss"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3588): warning C4456: Deklaration von "SamenAmen2" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3371): note: Siehe Deklaration von "SamenAmen2"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3638): warning C4456: Deklaration von "SamenAmen2" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3588): note: Siehe Deklaration von "SamenAmen2"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(3680): warning C4456: Deklaration von "gayniggaasss" blendet vorherige lokale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(3587): note: Siehe Deklaration von "gayniggaasss"

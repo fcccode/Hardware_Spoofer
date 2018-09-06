@@ -1,0 +1,43 @@
+﻿  Building 'driver-disk' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Microsoft (R) C/C++-Optimierungscompiler Version 19.14.26429.4 für x64
+  Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+  
+  cl /c /I"C:\Program Files\mingw-w64\x86_64-7.3.0-win32-seh-rt_v5-rev0\mingw64\x86_64-w64-mingw32\include" /I"C:\Program Files\mingw-w64\x86_64-7.3.0-win32-seh-rt_v5-rev0\mingw64\x86_64-w64-mingw32\include\ddk" /Ix64\Release\ /Zi /W4 /WX- /diagnostics:classic /O2 /Ob2 /Oi /Os /Oy- /D _WIN64 /D _AMD64_ /D AMD64 /D _WIN32_WINNT=0x0A00 /D WINVER=0x0A00 /D WINNT=1 /D NTDDI_VERSION=0x0A000005 /D KMDF_VERSION_MAJOR=1 /D KMDF_VERSION_MINOR=15 /GF /Gm- /Zp8 /GS- /Gy /fp:precise /Zc:wchar_t- /Zc:forScope /Zc:inline /GR- /Fx /FAcs /Fa"x64\Release\\" /Fo"x64\Release\\" /Fd"x64\Release\vc141.pdb" /FR"x64\Release\\" /Gz /TC /wd4603 /wd4627 /wd4986 /wd4987 /wd4996 /FI"C:\Program Files (x86)\Windows Kits\10\Include\10.0.17134.0\shared\warning.h" /analyze- /FC /errorReport:prompt /kernel -cbstring -d2epilogunwind  /d1nodatetime /d1import_no_registry /d2AllowCompatibleILVersions /d2Zi+ /Qspectre main.c
+  
+  main.c
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(1012): warning C4214: Nicht dem Standard entsprechende Erweiterung: Basistyp für Bitfeld ist nicht int
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(1013): warning C4214: Nicht dem Standard entsprechende Erweiterung: Basistyp für Bitfeld ist nicht int
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(1014): warning C4214: Nicht dem Standard entsprechende Erweiterung: Basistyp für Bitfeld ist nicht int
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(1015): warning C4214: Nicht dem Standard entsprechende Erweiterung: Basistyp für Bitfeld ist nicht int
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(1016): warning C4214: Nicht dem Standard entsprechende Erweiterung: Basistyp für Bitfeld ist nicht int
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(1017): warning C4214: Nicht dem Standard entsprechende Erweiterung: Basistyp für Bitfeld ist nicht int
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(1018): warning C4214: Nicht dem Standard entsprechende Erweiterung: Basistyp für Bitfeld ist nicht int
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(1019): warning C4214: Nicht dem Standard entsprechende Erweiterung: Basistyp für Bitfeld ist nicht int
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(1020): warning C4214: Nicht dem Standard entsprechende Erweiterung: Basistyp für Bitfeld ist nicht int
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(1021): warning C4214: Nicht dem Standard entsprechende Erweiterung: Basistyp für Bitfeld ist nicht int
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(1147): warning C4273: "ZwAllocateVirtualMemory": Inkonsistente DLL-Bindung.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\km\ntifs.h(26990): note: Siehe vorherige Definition von "ZwAllocateVirtualMemory"
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(1153): warning C4273: "ZwFreeVirtualMemory": Inkonsistente DLL-Bindung.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\km\ntifs.h(27007): note: Siehe vorherige Definition von "ZwFreeVirtualMemory"
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(3330): error C2014: Präprozessorbefehl muss mit dem ersten Zeichen in der Zeile beginnen.
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(4101): error C2011: "_SHUTDOWN_ACTION": "enum" Typneudefinition
+  c:\users\finn\documents\github\hwidfaker\disk\ntos.h(772): note: Siehe Deklaration von "_SHUTDOWN_ACTION"
+c:\users\finn\documents\github\hwidfaker\disk\ntos.h(4330): error C2011: "_KGDTENTRY": "struct" Typneudefinition
+  c:\users\finn\documents\github\hwidfaker\disk\ntos.h(1001): note: Siehe Deklaration von "_KGDTENTRY"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(82): warning C4459: Deklaration von "process" blendet globale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(19): note: Siehe Deklaration von "process"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(87): warning C4047: "Funktion": Anzahl der Dereferenzierungen bei "PSIZE_T" und "PSIZE_T *" unterschiedlich
+c:\users\finn\documents\github\hwidfaker\disk\main.c(87): warning C4024: "MmCopyVirtualMemory": unterschiedliche Typen für formalen und übergebenen Parameter 7
+c:\users\finn\documents\github\hwidfaker\disk\main.c(97): warning C4047: "Funktion": Anzahl der Dereferenzierungen bei "PSIZE_T" und "PSIZE_T *" unterschiedlich
+c:\users\finn\documents\github\hwidfaker\disk\main.c(97): warning C4024: "MmCopyVirtualMemory": unterschiedliche Typen für formalen und übergebenen Parameter 7
+c:\users\finn\documents\github\hwidfaker\disk\main.c(103): warning C4459: Deklaration von "PID" blendet globale Deklaration aus
+  c:\users\finn\documents\github\hwidfaker\disk\main.c(17): note: Siehe Deklaration von "PID"
+c:\users\finn\documents\github\hwidfaker\disk\main.c(130): warning C4047: "=": Anzahl der Dereferenzierungen bei "DWORD" und "HANDLE" unterschiedlich
+c:\users\finn\documents\github\hwidfaker\disk\main.c(131): warning C4022: "GetSectionBaseAddress": Zeigertyp für übergebenen Parameter 1 stimmt nicht mit dem deklarierten Zeigertyp überein
+c:\users\finn\documents\github\hwidfaker\disk\main.c(156): warning C4022: "PsLookupProcessByProcessId": Zeigertyp für übergebenen Parameter 1 stimmt nicht mit dem deklarierten Zeigertyp überein
+c:\users\finn\documents\github\hwidfaker\disk\main.c(157): warning C4022: "KeReadVirtualMemory": Zeigertyp für übergebenen Parameter 2 stimmt nicht mit dem deklarierten Zeigertyp überein
+c:\users\finn\documents\github\hwidfaker\disk\main.c(173): warning C4022: "PsLookupProcessByProcessId": Zeigertyp für übergebenen Parameter 1 stimmt nicht mit dem deklarierten Zeigertyp überein
+c:\users\finn\documents\github\hwidfaker\disk\main.c(175): warning C4022: "KeWriteVirtualMemory": Zeigertyp für übergebenen Parameter 3 stimmt nicht mit dem deklarierten Zeigertyp überein
+c:\users\finn\documents\github\hwidfaker\disk\main.c(197): warning C4047: "=": Anzahl der Dereferenzierungen bei "ULONG" und "PVOID" unterschiedlich
+c:\users\finn\documents\github\hwidfaker\disk\main.c(226): warning C4047: "Funktion": Anzahl der Dereferenzierungen bei "PLOAD_IMAGE_NOTIFY_ROUTINE" und "PLOAD_IMAGE_NOTIFY_ROUTINE (__cdecl *)(PUNICODE_STRING,HANDLE,PIMAGE_INFO)" unterschiedlich
+c:\users\finn\documents\github\hwidfaker\disk\main.c(226): warning C4024: "PsSetLoadImageNotifyRoutine": unterschiedliche Typen für formalen und übergebenen Parameter 1
