@@ -5,682 +5,826 @@ include listing.inc
 INCLUDELIB LIBCMT
 INCLUDELIB OLDNAMES
 
+PUBLIC	RealDiskDeviceControl
+PUBLIC	NumTable
+PUBLIC	SpoofedHWID
+PUBLIC	HWIDGenerated
+_BSS	SEGMENT
+RealDiskDeviceControl DQ 01H DUP (?)
+HWIDGenerated DD 01H DUP (?)
+_BSS	ENDS
 _DATA	SEGMENT
-COMM	DeviceObject:QWORD
-COMM	dev:BYTE:010H
-COMM	dos:BYTE:010H
-COMM	PID:DWORD
-COMM	MainModule:QWORD
-COMM	process:QWORD
+NumTable DB	'123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 00H
+	ORG $+4
+SpoofedHWID DB	'SYSTEM', 00H, 00H
 _DATA	ENDS
-PUBLIC	DriverUnload
-PUBLIC	RPM
-PUBLIC	WPM
-PUBLIC	DriverDispatch
+PUBLIC	GetDriverObject
+PUBLIC	SpoofSerialNumber
+PUBLIC	StorageQueryCompletionRoutine
+PUBLIC	SmartCompletionRoutine
+PUBLIC	DiskDriverDispatch
+PUBLIC	UnsupportedDispatch
+PUBLIC	CreateDispatch
+PUBLIC	CloseDispatch
 PUBLIC	DriverEntry
-PUBLIC	??_C@_1BK@DMJFENL@?$AA?2?$AAD?$AAe?$AAv?$AAi?$AAc?$AAe?$AA?2?$AAA?$AAs?$AAu?$AAs?$AA?$AA@FNODOBFM@ ;  ?? ::FNODOBFM::`string'
-PUBLIC	??_C@_1CC@FCIJJCAF@?$AA?2?$AAD?$AAo?$AAs?$AAD?$AAe?$AAv?$AAi?$AAc?$AAe?$AAs?$AA?2?$AAA?$AAs?$AAu?$AAs?$AA?$AA@FNODOBFM@ ;  ?? ::FNODOBFM::`string'
+PUBLIC	??_C@_1BK@NMHHIFPM@?$AA?2?$AAD?$AAr?$AAi?$AAv?$AAe?$AAr?$AA?2?$AAd?$AAi?$AAs?$AAk?$AA?$AA@FNODOBFM@ ;  ?? ::FNODOBFM::`string'
 EXTRN	__imp_RtlInitUnicodeString:PROC
-EXTRN	__imp_ProbeForRead:PROC
-EXTRN	__imp_ProbeForWrite:PROC
+EXTRN	__imp_KeQuerySystemTimePrecise:PROC
+EXTRN	__imp_ExAllocatePool:PROC
+EXTRN	__imp_ExFreePoolWithTag:PROC
 EXTRN	__imp_IofCompleteRequest:PROC
-EXTRN	__imp_IoCreateDevice:PROC
-EXTRN	__imp_IoCreateSymbolicLink:PROC
-EXTRN	__imp_IoDeleteDevice:PROC
-EXTRN	__imp_IoDeleteSymbolicLink:PROC
-EXTRN	__imp_IoGetCurrentProcess:PROC
-EXTRN	__imp_KeAttachProcess:PROC
-EXTRN	__imp_KeDetachProcess:PROC
-EXTRN	__imp_PsLookupProcessByProcessId:PROC
-EXTRN	MmCopyVirtualMemory:PROC
-EXTRN	__imp_PsGetProcessSectionBaseAddress:PROC
-EXTRN	__C_specific_handler:PROC
+EXTRN	__imp_ObReferenceObjectByName:PROC
+EXTRN	__imp_IoDriverObjectType:QWORD
 ;	COMDAT pdata
 pdata	SEGMENT
-$pdata$DriverUnload DD imagerel $LN4
-	DD	imagerel $LN4+40
-	DD	imagerel $unwind$DriverUnload
+$pdata$GetDriverObject DD imagerel $LN5
+	DD	imagerel $LN5+74
+	DD	imagerel $unwind$GetDriverObject
 pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
-$pdata$RPM DD	imagerel $LN12
-	DD	imagerel $LN12+119
-	DD	imagerel $unwind$RPM
+$pdata$SpoofSerialNumber DD imagerel $LN15
+	DD	imagerel $LN15+95
+	DD	imagerel $unwind$SpoofSerialNumber
 pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
-$pdata$WPM DD	imagerel $LN12
-	DD	imagerel $LN12+122
-	DD	imagerel $unwind$WPM
+$pdata$StorageQueryCompletionRoutine DD imagerel $LN7
+	DD	imagerel $LN7+137
+	DD	imagerel $unwind$StorageQueryCompletionRoutine
 pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
-$pdata$DriverDispatch DD imagerel $LN15
-	DD	imagerel $LN15+285
-	DD	imagerel $unwind$DriverDispatch
+$pdata$SmartCompletionRoutine DD imagerel $LN5
+	DD	imagerel $LN5+39
+	DD	imagerel $unwind$SmartCompletionRoutine
+pdata	ENDS
+;	COMDAT pdata
+pdata	SEGMENT
+$pdata$DiskDriverDispatch DD imagerel $LN12
+	DD	imagerel $LN12+198
+	DD	imagerel $unwind$DiskDriverDispatch
+pdata	ENDS
+;	COMDAT pdata
+pdata	SEGMENT
+$pdata$UnsupportedDispatch DD imagerel $LN4
+	DD	imagerel $LN4+36
+	DD	imagerel $unwind$UnsupportedDispatch
+pdata	ENDS
+;	COMDAT pdata
+pdata	SEGMENT
+$pdata$CreateDispatch DD imagerel $LN4
+	DD	imagerel $LN4+29
+	DD	imagerel $unwind$CreateDispatch
+pdata	ENDS
+;	COMDAT pdata
+pdata	SEGMENT
+$pdata$CloseDispatch DD imagerel $LN4
+	DD	imagerel $LN4+29
+	DD	imagerel $unwind$CloseDispatch
 pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
 $pdata$DriverEntry DD imagerel $LN4
-	DD	imagerel $LN4+203
+	DD	imagerel $LN4+117
 	DD	imagerel $unwind$DriverEntry
 pdata	ENDS
-;	COMDAT ??_C@_1CC@FCIJJCAF@?$AA?2?$AAD?$AAo?$AAs?$AAD?$AAe?$AAv?$AAi?$AAc?$AAe?$AAs?$AA?2?$AAA?$AAs?$AAu?$AAs?$AA?$AA@FNODOBFM@
+;	COMDAT ??_C@_1BK@NMHHIFPM@?$AA?2?$AAD?$AAr?$AAi?$AAv?$AAe?$AAr?$AA?2?$AAd?$AAi?$AAs?$AAk?$AA?$AA@FNODOBFM@
 text$s	SEGMENT
-??_C@_1CC@FCIJJCAF@?$AA?2?$AAD?$AAo?$AAs?$AAD?$AAe?$AAv?$AAi?$AAc?$AAe?$AAs?$AA?2?$AAA?$AAs?$AAu?$AAs?$AA?$AA@FNODOBFM@ DB '\'
-	DB	00H, 'D', 00H, 'o', 00H, 's', 00H, 'D', 00H, 'e', 00H, 'v', 00H
-	DB	'i', 00H, 'c', 00H, 'e', 00H, 's', 00H, '\', 00H, 'A', 00H, 's'
-	DB	00H, 'u', 00H, 's', 00H, 00H, 00H		;  ?? ::FNODOBFM::`string'
-text$s	ENDS
-;	COMDAT ??_C@_1BK@DMJFENL@?$AA?2?$AAD?$AAe?$AAv?$AAi?$AAc?$AAe?$AA?2?$AAA?$AAs?$AAu?$AAs?$AA?$AA@FNODOBFM@
-text$s	SEGMENT
-??_C@_1BK@DMJFENL@?$AA?2?$AAD?$AAe?$AAv?$AAi?$AAc?$AAe?$AA?2?$AAA?$AAs?$AAu?$AAs?$AA?$AA@FNODOBFM@ DB '\'
-	DB	00H, 'D', 00H, 'e', 00H, 'v', 00H, 'i', 00H, 'c', 00H, 'e', 00H
-	DB	'\', 00H, 'A', 00H, 's', 00H, 'u', 00H, 's', 00H, 00H, 00H ;  ?? ::FNODOBFM::`string'
+??_C@_1BK@NMHHIFPM@?$AA?2?$AAD?$AAr?$AAi?$AAv?$AAe?$AAr?$AA?2?$AAd?$AAi?$AAs?$AAk?$AA?$AA@FNODOBFM@ DB '\'
+	DB	00H, 'D', 00H, 'r', 00H, 'i', 00H, 'v', 00H, 'e', 00H, 'r', 00H
+	DB	'\', 00H, 'd', 00H, 'i', 00H, 's', 00H, 'k', 00H, 00H, 00H ;  ?? ::FNODOBFM::`string'
 text$s	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
-$unwind$DriverEntry DD 040602H
+$unwind$DriverEntry DD 060a02H
 	DD	06001602H
-	DD	030027206H
+	DD	08340aH
+	DD	07006520aH
 xdata	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
-$unwind$DriverDispatch DD 060a02H
-	DD	06001602H
-	DD	06340aH
-	DD	07006320aH
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$unwind$WPM DD	080f0aH
-	DD	06001602H
-	DD	0b640fH
-	DD	0a340fH
-	DD	0700b720fH
-	DD	imagerel __C_specific_handler
-	DD	01H
-	DD	imagerel $LN12+24
-	DD	imagerel $LN12+101
-	DD	01H
-	DD	imagerel $LN12+101
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$unwind$RPM DD	080f0aH
-	DD	06001602H
-	DD	0b640fH
-	DD	0a340fH
-	DD	0700b720fH
-	DD	imagerel __C_specific_handler
-	DD	01H
-	DD	imagerel $LN12+24
-	DD	imagerel $LN12+98
-	DD	01H
-	DD	imagerel $LN12+98
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$unwind$DriverUnload DD 040602H
+$unwind$CloseDispatch DD 040602H
 	DD	06001602H
 	DD	030023206H
 xdata	ENDS
+;	COMDAT xdata
+xdata	SEGMENT
+$unwind$CreateDispatch DD 040602H
+	DD	06001602H
+	DD	030023206H
+xdata	ENDS
+;	COMDAT xdata
+xdata	SEGMENT
+$unwind$UnsupportedDispatch DD 040602H
+	DD	06001602H
+	DD	030023206H
+xdata	ENDS
+;	COMDAT xdata
+xdata	SEGMENT
+$unwind$DiskDriverDispatch DD 0a1402H
+	DD	06001608H
+	DD	086414H
+	DD	075414H
+	DD	063414H
+	DD	070103214H
+xdata	ENDS
+;	COMDAT xdata
+xdata	SEGMENT
+$unwind$SmartCompletionRoutine DD 040602H
+	DD	06001602H
+	DD	030023206H
+xdata	ENDS
+;	COMDAT xdata
+xdata	SEGMENT
+$unwind$StorageQueryCompletionRoutine DD 0c1802H
+	DD	06001606H
+	DD	0a6418H
+	DD	095418H
+	DD	083418H
+	DD	0f0143218H
+	DD	07010e012H
+xdata	ENDS
+;	COMDAT xdata
+xdata	SEGMENT
+$unwind$SpoofSerialNumber DD 040602H
+	DD	06001602H
+	DD	030023206H
+xdata	ENDS
+;	COMDAT xdata
+xdata	SEGMENT
+$unwind$GetDriverObject DD 040802H
+	DD	06001602H
+	DD	030047208H
+xdata	ENDS
 ; Function compile flags: /Ogsp
-; File c:\users\finn\documents\github\hwidfaker\disk\main.c
+; File c:\users\finn\documents\github\hardware_spoofer\disk\main.c
 ;	COMDAT DriverEntry
 _TEXT	SEGMENT
-DriverObject$ = 80
-RegistryPath$ = 88
+diskDrvName$ = 32
+DriverObject$ = 64
+RegistryPath$ = 72
 DriverEntry PROC					; COMDAT
 
-; 204  : {
+; 207  : {
 
 $LN4:
-  00000	40 53		 push	 rbx
-  00002	48 83 ec 40	 sub	 rsp, 64			; 00000040H
+  00000	48 89 5c 24 08	 mov	 QWORD PTR [rsp+8], rbx
+  00005	57		 push	 rdi
+  00006	48 83 ec 30	 sub	 rsp, 48			; 00000030H
+  0000a	48 8b fa	 mov	 rdi, rdx
+  0000d	48 8b d9	 mov	 rbx, rcx
 
-; 205  : 	// This will only help with shitty kernel anti cheats since most of them can easily enumerate all the modules and find this lonely boy
-; 206  : 	// Get our drivers entry and the entries for drivers before ours and after ours
-; 207  : 	PLDR_DATA_TABLE_ENTRY CurDriverEntry = (PLDR_DATA_TABLE_ENTRY)DriverObject->DriverSection;
+; 208  : 	NTSTATUS        status = STATUS_SUCCESS;
+; 209  : 
+; 210  : 	UNICODE_STRING diskDrvName;
+; 211  : 	RtlInitUnicodeString(&diskDrvName, L"\\Driver\\disk");
 
-  00006	4c 8b 41 28	 mov	 r8, QWORD PTR [rcx+40]
-  0000a	48 8b d9	 mov	 rbx, rcx
+  00010	48 8d 15 00 00
+	00 00		 lea	 rdx, OFFSET FLAT:??_C@_1BK@NMHHIFPM@?$AA?2?$AAD?$AAr?$AAi?$AAv?$AAe?$AAr?$AA?2?$AAd?$AAi?$AAs?$AAk?$AA?$AA@FNODOBFM@
+  00017	48 8d 4c 24 20	 lea	 rcx, QWORD PTR diskDrvName$[rsp]
+  0001c	ff 15 00 00 00
+	00		 call	 QWORD PTR __imp_RtlInitUnicodeString
 
-; 208  : 	PLDR_DATA_TABLE_ENTRY NextDriverEntry = (PLDR_DATA_TABLE_ENTRY)CurDriverEntry->InLoadOrderLinks.Flink;
-; 209  : 	PLDR_DATA_TABLE_ENTRY PrevDriverEntry = (PLDR_DATA_TABLE_ENTRY)CurDriverEntry->InLoadOrderLinks.Blink;
-; 210  : 
-; 211  : 	// Change the entries of the prevoius and the next driver to basically skip our driver
-; 212  : 	PrevDriverEntry->InLoadOrderLinks.Flink = CurDriverEntry->InLoadOrderLinks.Flink;
-; 213  : 	NextDriverEntry->InLoadOrderLinks.Blink = CurDriverEntry->InLoadOrderLinks.Blink;
+; 212  : 
+; 213  : 	PDRIVER_OBJECT diskDrvObj = GetDriverObject(&diskDrvName);
+
+  00022	48 8d 4c 24 20	 lea	 rcx, QWORD PTR diskDrvName$[rsp]
+  00027	e8 00 00 00 00	 call	 GetDriverObject
+
 ; 214  : 
-; 215  : 	// Make our driver lonely...
-; 216  : 	CurDriverEntry->InLoadOrderLinks.Flink = (PLIST_ENTRY)CurDriverEntry;
-; 217  : 	CurDriverEntry->InLoadOrderLinks.Blink = (PLIST_ENTRY)CurDriverEntry;
-; 218  : 
-; 219  : 	// Our device and symbolic link names
-; 220  : 	RtlInitUnicodeString(&dev, L"\\Device\\Asus");
+; 215  : 	RealDiskDeviceControl = diskDrvObj->MajorFunction[IRP_MJ_DEVICE_CONTROL];
+; 216  : 
+; 217  : 	diskDrvObj->DriverInit = &DriverEntry;
 
-  0000d	48 8d 0d 00 00
-	00 00		 lea	 rcx, OFFSET FLAT:dev
-  00014	49 8b 40 08	 mov	 rax, QWORD PTR [r8+8]
-  00018	49 8b 10	 mov	 rdx, QWORD PTR [r8]
-  0001b	48 89 10	 mov	 QWORD PTR [rax], rdx
-  0001e	49 8b 40 08	 mov	 rax, QWORD PTR [r8+8]
-  00022	48 89 42 08	 mov	 QWORD PTR [rdx+8], rax
-  00026	48 8d 15 00 00
-	00 00		 lea	 rdx, OFFSET FLAT:??_C@_1BK@DMJFENL@?$AA?2?$AAD?$AAe?$AAv?$AAi?$AAc?$AAe?$AA?2?$AAA?$AAs?$AAu?$AAs?$AA?$AA@FNODOBFM@
-  0002d	4d 89 00	 mov	 QWORD PTR [r8], r8
-  00030	4d 89 40 08	 mov	 QWORD PTR [r8+8], r8
-  00034	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_RtlInitUnicodeString
+  0002c	48 8d 0d 00 00
+	00 00		 lea	 rcx, OFFSET FLAT:DriverEntry
+  00033	4c 8b 80 e0 00
+	00 00		 mov	 r8, QWORD PTR [rax+224]
+  0003a	4c 89 05 00 00
+	00 00		 mov	 QWORD PTR RealDiskDeviceControl, r8
+  00041	48 89 48 58	 mov	 QWORD PTR [rax+88], rcx
 
-; 221  : 	RtlInitUnicodeString(&dos, L"\\DosDevices\\Asus");
+; 218  : 	diskDrvObj->DriverStart = (PVOID)DriverObject;
+; 219  : 	diskDrvObj->DriverSize = (ULONG)RegistryPath;
+; 220  : 	diskDrvObj->FastIoDispatch = NULL;
 
-  0003a	48 8d 15 00 00
-	00 00		 lea	 rdx, OFFSET FLAT:??_C@_1CC@FCIJJCAF@?$AA?2?$AAD?$AAo?$AAs?$AAD?$AAe?$AAv?$AAi?$AAc?$AAe?$AAs?$AA?2?$AAA?$AAs?$AAu?$AAs?$AA?$AA@FNODOBFM@
-  00041	48 8d 0d 00 00
-	00 00		 lea	 rcx, OFFSET FLAT:dos
-  00048	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_RtlInitUnicodeString
+  00045	33 c9		 xor	 ecx, ecx
+  00047	48 89 48 50	 mov	 QWORD PTR [rax+80], rcx
 
-; 222  : 
-; 223  : 	// Create our device and symbolic link
-; 224  : 	IoCreateDevice(DriverObject, 0, &dev, FILE_DEVICE_UNKNOWN, FILE_DEVICE_SECURE_OPEN, FALSE, &DeviceObject);
+; 221  : 	diskDrvObj->DriverStartIo = NULL;
 
-  0004e	48 8d 05 00 00
-	00 00		 lea	 rax, OFFSET FLAT:DeviceObject
-  00055	41 b9 22 00 00
-	00		 mov	 r9d, 34			; 00000022H
-  0005b	48 89 44 24 30	 mov	 QWORD PTR [rsp+48], rax
-  00060	4c 8d 05 00 00
-	00 00		 lea	 r8, OFFSET FLAT:dev
-  00067	c6 44 24 28 00	 mov	 BYTE PTR [rsp+40], 0
-  0006c	33 d2		 xor	 edx, edx
-  0006e	48 8b cb	 mov	 rcx, rbx
-  00071	c7 44 24 20 00
-	01 00 00	 mov	 DWORD PTR [rsp+32], 256	; 00000100H
-  00079	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_IoCreateDevice
+  0004b	48 89 48 60	 mov	 QWORD PTR [rax+96], rcx
 
-; 225  : 	IoCreateSymbolicLink(&dos, &dev);
+; 222  : 	diskDrvObj->DriverUnload = NULL;
 
-  0007f	48 8d 15 00 00
-	00 00		 lea	 rdx, OFFSET FLAT:dev
-  00086	48 8d 0d 00 00
-	00 00		 lea	 rcx, OFFSET FLAT:dos
-  0008d	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_IoCreateSymbolicLink
+  0004f	48 89 48 68	 mov	 QWORD PTR [rax+104], rcx
 
+; 223  : 
+; 224  : 	/*for (ULONG t = 0; t <= IRP_MJ_MAXIMUM_FUNCTION; t++)
+; 225  : 	diskDrvObj->MajorFunction[t] = &UnsupportedDispatch;*/
 ; 226  : 
-; 227  : 	// Used for IO control and when driver is unloaded
-; 228  : 	DriverObject->MajorFunction[IRP_MJ_DEVICE_CONTROL] = DriverDispatch;
+; 227  : 	diskDrvObj->MajorFunction[IRP_MJ_DEVICE_CONTROL] = &DiskDriverDispatch;
 
-  00093	48 8d 05 00 00
-	00 00		 lea	 rax, OFFSET FLAT:DriverDispatch
-  0009a	48 89 83 e0 00
-	00 00		 mov	 QWORD PTR [rbx+224], rax
+  00053	48 8d 0d 00 00
+	00 00		 lea	 rcx, OFFSET FLAT:DiskDriverDispatch
+  0005a	48 89 58 18	 mov	 QWORD PTR [rax+24], rbx
 
-; 229  : 	DriverObject->DriverUnload = DriverUnload;
-
-  000a1	48 8d 05 00 00
-	00 00		 lea	 rax, OFFSET FLAT:DriverUnload
-  000a8	48 89 43 68	 mov	 QWORD PTR [rbx+104], rax
-
+; 228  : 	/*diskDrvObj->MajorFunction[IRP_MJ_CREATE] = &CreateDispatch;
+; 229  : 	diskDrvObj->MajorFunction[IRP_MJ_CLOSE] = &CloseDispatch;*/
 ; 230  : 
-; 231  : 	// It won't work if you remove, so don't touch it!!!
-; 232  : 	DeviceObject->Flags |= DO_DIRECT_IO;
+; 231  : 	return status;
+; 232  : }
 
-  000ac	48 8b 05 00 00
-	00 00		 mov	 rax, QWORD PTR DeviceObject
-  000b3	83 48 30 10	 or	 DWORD PTR [rax+48], 16
-
-; 233  : 	DeviceObject->Flags &= ~DO_DEVICE_INITIALIZING;
-
-  000b7	48 8b 05 00 00
-	00 00		 mov	 rax, QWORD PTR DeviceObject
-  000be	0f ba 70 30 07	 btr	 DWORD PTR [rax+48], 7
-
-; 234  : 
-; 235  : 	return STATUS_SUCCESS;
-
-  000c3	33 c0		 xor	 eax, eax
-
-; 236  : }
-
-  000c5	48 83 c4 40	 add	 rsp, 64			; 00000040H
-  000c9	5b		 pop	 rbx
-  000ca	c3		 ret	 0
+  0005e	48 8b 5c 24 40	 mov	 rbx, QWORD PTR [rsp+64]
+  00063	48 89 88 e0 00
+	00 00		 mov	 QWORD PTR [rax+224], rcx
+  0006a	89 78 20	 mov	 DWORD PTR [rax+32], edi
+  0006d	33 c0		 xor	 eax, eax
+  0006f	48 83 c4 30	 add	 rsp, 48			; 00000030H
+  00073	5f		 pop	 rdi
+  00074	c3		 ret	 0
 DriverEntry ENDP
 _TEXT	ENDS
 ; Function compile flags: /Ogsp
-; File c:\users\finn\documents\github\hwidfaker\disk\main.c
-;	COMDAT DriverDispatch
+; File c:\users\finn\documents\github\hardware_spoofer\disk\main.c
+;	COMDAT CloseDispatch
 _TEXT	SEGMENT
-pDeviceObject$ = 48
+DeviceObject$ = 48
 Irp$ = 56
-DriverDispatch PROC					; COMDAT
+CloseDispatch PROC					; COMDAT
 
-; 132  : {
-
-$LN15:
-  00000	48 89 5c 24 08	 mov	 QWORD PTR [rsp+8], rbx
-  00005	57		 push	 rdi
-  00006	48 83 ec 20	 sub	 rsp, 32			; 00000020H
-
-; 133  : 	NTSTATUS status = STATUS_SUCCESS;
-; 134  : 	ULONG bytes = 0;
-; 135  : 
-; 136  : 	PIO_STACK_LOCATION stack = IoGetCurrentIrpStackLocation(Irp);
-; 137  : 
-; 138  : 	// Get the IOCTL code
-; 139  : 	ULONG IOcode = stack->Parameters.DeviceIoControl.IoControlCode;
-
-  0000a	48 8b 82 b8 00
-	00 00		 mov	 rax, QWORD PTR [rdx+184]
-  00011	48 8b fa	 mov	 rdi, rdx
-  00014	8b 48 18	 mov	 ecx, DWORD PTR [rax+24]
-
-; 140  : 
-; 141  : 	if (IOcode == READ_REQUEST)
-
-  00017	81 f9 00 20 22
-	00		 cmp	 ecx, 2236416		; 00222000H
-  0001d	75 3f		 jne	 SHORT $LN2@DriverDisp
-
-; 142  : 	{
-; 143  : 		// Get the struct address from the irp buffer
-; 144  : 		PREAD_MEM read = (PREAD_MEM)Irp->AssociatedIrp.SystemBuffer;
-
-  0001f	48 8b 5a 18	 mov	 rbx, QWORD PTR [rdx+24]
-
-; 145  : 
-; 146  : 		// Check if address is in usermode virtual memory (the usermode app sometimes fuck up for some reason)
-; 147  : 		if (read->address < 0x7FFFFFFFFFFF)
-
-  00023	48 b8 ff ff ff
-	ff ff 7f 00 00	 mov	 rax, 140737488355327	; 00007fffffffffffH
-  0002d	48 39 03	 cmp	 QWORD PTR [rbx], rax
-  00030	0f 83 c2 00 00
-	00		 jae	 $LN4@DriverDisp
-
-; 148  : 		{
-; 149  : 			PsLookupProcessByProcessId((HANDLE)PID, &process);
-
-  00036	8b 0d 00 00 00
-	00		 mov	 ecx, DWORD PTR PID
-  0003c	48 8d 15 00 00
-	00 00		 lea	 rdx, OFFSET FLAT:process
-  00043	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_PsLookupProcessByProcessId
-
-; 150  : 			RPM(read->address, &read->response, read->size);
-
-  00049	44 8b 43 10	 mov	 r8d, DWORD PTR [rbx+16]
-  0004d	48 8d 53 08	 lea	 rdx, QWORD PTR [rbx+8]
-  00051	48 8b 0b	 mov	 rcx, QWORD PTR [rbx]
-  00054	e8 00 00 00 00	 call	 RPM
-
-; 151  : 		}
-; 152  : 
-; 153  : 		status = STATUS_SUCCESS;
-; 154  : 		bytes = sizeof(PREAD_MEM);
-; 155  : 	}
-
-  00059	e9 9a 00 00 00	 jmp	 $LN4@DriverDisp
-$LN2@DriverDisp:
-
-; 156  : 	else if (IOcode == WRITE_REQUEST)
-
-  0005e	81 f9 04 20 22
-	00		 cmp	 ecx, 2236420		; 00222004H
-  00064	75 38		 jne	 SHORT $LN5@DriverDisp
-
-; 157  : 	{
-; 158  : 		// Get the struct address from the irp buffer
-; 159  : 		PWRITE_MEM write = (PWRITE_MEM)Irp->AssociatedIrp.SystemBuffer;
-
-  00066	48 8b 5a 18	 mov	 rbx, QWORD PTR [rdx+24]
-
-; 160  : 
-; 161  : 		// Check if address is in usermode virtual memory (the usermode app sometimes fuck up for some reason)
-; 162  : 		if (write->address < 0x7FFFFFFFFFFF)
-
-  0006a	48 b8 ff ff ff
-	ff ff 7f 00 00	 mov	 rax, 140737488355327	; 00007fffffffffffH
-  00074	48 39 03	 cmp	 QWORD PTR [rbx], rax
-  00077	73 7f		 jae	 SHORT $LN4@DriverDisp
-
-; 163  : 		{
-; 164  : 			PsLookupProcessByProcessId((HANDLE)PID, &process);
-
-  00079	8b 0d 00 00 00
-	00		 mov	 ecx, DWORD PTR PID
-  0007f	48 8d 15 00 00
-	00 00		 lea	 rdx, OFFSET FLAT:process
-  00086	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_PsLookupProcessByProcessId
-
-; 165  : 			WPM(&write->value, write->address, write->size);
-
-  0008c	44 8b 43 0c	 mov	 r8d, DWORD PTR [rbx+12]
-  00090	48 8d 4b 08	 lea	 rcx, QWORD PTR [rbx+8]
-  00094	48 8b 13	 mov	 rdx, QWORD PTR [rbx]
-  00097	e8 00 00 00 00	 call	 WPM
-
-; 166  : 		}
-; 167  : 
-; 168  : 		status = STATUS_SUCCESS;
-; 169  : 		bytes = sizeof(PWRITE_MEM);
-; 170  : 	}
-
-  0009c	eb 5a		 jmp	 SHORT $LN4@DriverDisp
-$LN5@DriverDisp:
-
-; 171  : 	else if (IOcode == SET_PID_REQUEST)
-
-  0009e	81 f9 08 20 22
-	00		 cmp	 ecx, 2236424		; 00222008H
-  000a4	75 0e		 jne	 SHORT $LN8@DriverDisp
-
-; 172  : 	{
-; 173  : 		// Get address of var where to read the PID from
-; 174  : 		PULONG Input = (PULONG)Irp->AssociatedIrp.SystemBuffer;
-
-  000a6	48 8b 42 18	 mov	 rax, QWORD PTR [rdx+24]
-
-; 175  : 		PID = *Input;
-
-  000aa	8b 08		 mov	 ecx, DWORD PTR [rax]
-  000ac	89 0d 00 00 00
-	00		 mov	 DWORD PTR PID, ecx
-
-; 176  : 
-; 177  : 		status = STATUS_SUCCESS;
-; 178  : 		bytes = sizeof(Input);
-; 179  : 	}
-
-  000b2	eb 44		 jmp	 SHORT $LN4@DriverDisp
-$LN8@DriverDisp:
-
-; 180  : 	else if (IOcode == GET_MODULE_REQUEST)
-
-  000b4	33 c0		 xor	 eax, eax
-  000b6	81 f9 0c 20 22
-	00		 cmp	 ecx, 2236428		; 0022200cH
-  000bc	75 3f		 jne	 SHORT $LN10@DriverDisp
-
-; 181  : 	{
-; 182  : 		// Get address of var where to store the main mdoule base address
-; 183  : 		PDWORD64 Module = (PDWORD64)Irp->AssociatedIrp.SystemBuffer;
-
-  000be	48 8b 5a 18	 mov	 rbx, QWORD PTR [rdx+24]
-
-; 184  : 		PsLookupProcessByProcessId((HANDLE)PID, &process);
-
-  000c2	48 8d 15 00 00
-	00 00		 lea	 rdx, OFFSET FLAT:process
-  000c9	8b 0d 00 00 00
-	00		 mov	 ecx, DWORD PTR PID
-  000cf	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_PsLookupProcessByProcessId
-
-; 185  : 
-; 186  : 		// Attach to the process and get it's base
-; 187  : 		KeAttachProcess((PKPROCESS)process);
-
-  000d5	48 8b 0d 00 00
-	00 00		 mov	 rcx, QWORD PTR process
-  000dc	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_KeAttachProcess
-
-; 188  : 		*Module = PsGetProcessSectionBaseAddress(process);
-
-  000e2	48 8b 0d 00 00
-	00 00		 mov	 rcx, QWORD PTR process
-  000e9	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_PsGetProcessSectionBaseAddress
-  000ef	48 89 03	 mov	 QWORD PTR [rbx], rax
-
-; 189  : 		KeDetachProcess();
-
-  000f2	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_KeDetachProcess
-$LN4@DriverDisp:
-
-; 190  : 
-; 191  : 		status = STATUS_SUCCESS;
-; 192  : 		bytes = sizeof(Module);
-; 193  : 	}
-; 194  : 
-; 195  : 	// Finish our request
-; 196  : 	Irp->IoStatus.Status = status;
-
-  000f8	b8 08 00 00 00	 mov	 eax, 8
-$LN10@DriverDisp:
-  000fd	83 67 30 00	 and	 DWORD PTR [rdi+48], 0
-
-; 197  : 	Irp->IoStatus.Information = bytes;
-; 198  : 	IoCompleteRequest(Irp, IO_NO_INCREMENT);
-
-  00101	33 d2		 xor	 edx, edx
-  00103	48 8b cf	 mov	 rcx, rdi
-  00106	48 89 47 38	 mov	 QWORD PTR [rdi+56], rax
-  0010a	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_IofCompleteRequest
-
-; 199  : 
-; 200  : 	return status;
-; 201  : }
-
-  00110	48 8b 5c 24 30	 mov	 rbx, QWORD PTR [rsp+48]
-  00115	33 c0		 xor	 eax, eax
-  00117	48 83 c4 20	 add	 rsp, 32			; 00000020H
-  0011b	5f		 pop	 rdi
-  0011c	c3		 ret	 0
-DriverDispatch ENDP
-_TEXT	ENDS
-; Function compile flags: /Ogsp
-; File c:\users\finn\documents\github\hwidfaker\disk\main.c
-;	COMDAT WPM
-_TEXT	SEGMENT
-src$ = 80
-dest$ = 88
-size$ = 96
-bytes$ = 104
-WPM	PROC						; COMDAT
-
-; 113  : {
-
-$LN12:
-  00000	48 89 5c 24 08	 mov	 QWORD PTR [rsp+8], rbx
-  00005	48 89 74 24 10	 mov	 QWORD PTR [rsp+16], rsi
-  0000a	57		 push	 rdi
-  0000b	48 83 ec 40	 sub	 rsp, 64			; 00000040H
-  0000f	49 8b d8	 mov	 rbx, r8
-  00012	48 8b fa	 mov	 rdi, rdx
-  00015	48 8b f1	 mov	 rsi, rcx
-
-; 114  : 	PSIZE_T bytes;
-; 115  : 	__try
-; 116  : 	{
-; 117  : 		// Checks if the memory address actually exists and is writable
-; 118  : 		ProbeForWrite(dest, size, (ULONG)size);
-
-  00018	44 8b c3	 mov	 r8d, ebx
-  0001b	48 8b d3	 mov	 rdx, rbx
-  0001e	48 8b cf	 mov	 rcx, rdi
-  00021	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_ProbeForWrite
-
-; 119  : 		// Use MmCopyVirtualMemory to copy memory from our usermode process to the game
-; 120  : 		if (NT_SUCCESS(MmCopyVirtualMemory(PsGetCurrentProcess(), src, process, dest, size, KernelMode, &bytes)))
-
-  00027	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_IoGetCurrentProcess
-  0002d	48 8b c8	 mov	 rcx, rax
-  00030	48 8d 44 24 68	 lea	 rax, QWORD PTR bytes$[rsp]
-  00035	48 89 44 24 30	 mov	 QWORD PTR [rsp+48], rax
-  0003a	c6 44 24 28 00	 mov	 BYTE PTR [rsp+40], 0
-  0003f	48 89 5c 24 20	 mov	 QWORD PTR [rsp+32], rbx
-  00044	4c 8b cf	 mov	 r9, rdi
-  00047	4c 8b 05 00 00
-	00 00		 mov	 r8, QWORD PTR process
-  0004e	48 8b d6	 mov	 rdx, rsi
-  00051	e8 00 00 00 00	 call	 MmCopyVirtualMemory
-  00056	85 c0		 test	 eax, eax
-  00058	78 04		 js	 SHORT $LN3@WPM
-
-; 121  : 			return STATUS_SUCCESS;
-
-  0005a	33 c0		 xor	 eax, eax
-  0005c	eb 0c		 jmp	 SHORT $LN10@WPM
-$LN3@WPM:
-
-; 122  : 		else
-; 123  : 			return STATUS_ACCESS_DENIED;
-
-  0005e	b8 22 00 00 c0	 mov	 eax, -1073741790	; ffffffffc0000022H
-  00063	eb 05		 jmp	 SHORT $LN10@WPM
-$LN8@WPM:
-
-; 124  : 	}
-; 125  : 	__except (EXCEPTION_EXECUTE_HANDLER)
-; 126  : 	{
-; 127  : 		return STATUS_ACCESS_DENIED;
-
-  00065	b8 22 00 00 c0	 mov	 eax, -1073741790	; ffffffffc0000022H
-$LN10@WPM:
-
-; 128  : 	}
-; 129  : }
-
-  0006a	48 8b 5c 24 50	 mov	 rbx, QWORD PTR [rsp+80]
-  0006f	48 8b 74 24 58	 mov	 rsi, QWORD PTR [rsp+88]
-  00074	48 83 c4 40	 add	 rsp, 64			; 00000040H
-  00078	5f		 pop	 rdi
-  00079	c3		 ret	 0
-WPM	ENDP
-_TEXT	ENDS
-; Function compile flags: /Ogsp
-; File c:\users\finn\documents\github\hwidfaker\disk\main.c
-;	COMDAT RPM
-_TEXT	SEGMENT
-src$ = 80
-dest$ = 88
-size$ = 96
-bytes$ = 104
-RPM	PROC						; COMDAT
-
-; 94   : {
-
-$LN12:
-  00000	48 89 5c 24 08	 mov	 QWORD PTR [rsp+8], rbx
-  00005	48 89 74 24 10	 mov	 QWORD PTR [rsp+16], rsi
-  0000a	57		 push	 rdi
-  0000b	48 83 ec 40	 sub	 rsp, 64			; 00000040H
-  0000f	49 8b d8	 mov	 rbx, r8
-  00012	48 8b f2	 mov	 rsi, rdx
-  00015	48 8b f9	 mov	 rdi, rcx
-
-; 95   : 	PSIZE_T bytes;
-; 96   : 	__try
-; 97   : 	{
-; 98   : 		// Checks if the memory address actually exists
-; 99   : 		ProbeForRead(src, size, (ULONG)size);
-
-  00018	44 8b c3	 mov	 r8d, ebx
-  0001b	48 8b d3	 mov	 rdx, rbx
-  0001e	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_ProbeForRead
-
-; 100  : 		// Use MmCopyVirtualMemory to copy memory from the game to our usermode process
-; 101  : 		if (NT_SUCCESS(MmCopyVirtualMemory(process, src, PsGetCurrentProcess(), dest, size, KernelMode, &bytes)))
-
-  00024	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_IoGetCurrentProcess
-  0002a	4c 8b c0	 mov	 r8, rax
-  0002d	48 8d 44 24 68	 lea	 rax, QWORD PTR bytes$[rsp]
-  00032	48 89 44 24 30	 mov	 QWORD PTR [rsp+48], rax
-  00037	c6 44 24 28 00	 mov	 BYTE PTR [rsp+40], 0
-  0003c	48 89 5c 24 20	 mov	 QWORD PTR [rsp+32], rbx
-  00041	4c 8b ce	 mov	 r9, rsi
-  00044	48 8b d7	 mov	 rdx, rdi
-  00047	48 8b 0d 00 00
-	00 00		 mov	 rcx, QWORD PTR process
-  0004e	e8 00 00 00 00	 call	 MmCopyVirtualMemory
-  00053	85 c0		 test	 eax, eax
-  00055	78 04		 js	 SHORT $LN3@RPM
-
-; 102  : 			return STATUS_SUCCESS;
-
-  00057	33 c0		 xor	 eax, eax
-  00059	eb 0c		 jmp	 SHORT $LN10@RPM
-$LN3@RPM:
-
-; 103  : 		else
-; 104  : 			return STATUS_ACCESS_DENIED;
-
-  0005b	b8 22 00 00 c0	 mov	 eax, -1073741790	; ffffffffc0000022H
-  00060	eb 05		 jmp	 SHORT $LN10@RPM
-$LN8@RPM:
-
-; 105  : 	}
-; 106  : 	__except (EXCEPTION_EXECUTE_HANDLER)
-; 107  : 	{
-; 108  : 		return STATUS_ACCESS_DENIED;
-
-  00062	b8 22 00 00 c0	 mov	 eax, -1073741790	; ffffffffc0000022H
-$LN10@RPM:
-
-; 109  : 	}
-; 110  : }
-
-  00067	48 8b 5c 24 50	 mov	 rbx, QWORD PTR [rsp+80]
-  0006c	48 8b 74 24 58	 mov	 rsi, QWORD PTR [rsp+88]
-  00071	48 83 c4 40	 add	 rsp, 64			; 00000040H
-  00075	5f		 pop	 rdi
-  00076	c3		 ret	 0
-RPM	ENDP
-_TEXT	ENDS
-; Function compile flags: /Ogsp
-; File c:\users\finn\documents\github\hwidfaker\disk\main.c
-;	COMDAT DriverUnload
-_TEXT	SEGMENT
-DriverObject$ = 48
-DriverUnload PROC					; COMDAT
-
-; 241  : {
+; 199  : {
 
 $LN4:
   00000	40 53		 push	 rbx
   00002	48 83 ec 20	 sub	 rsp, 32			; 00000020H
-  00006	48 8b d9	 mov	 rbx, rcx
+  00006	48 8b da	 mov	 rbx, rdx
 
-; 242  : 	// Clean up after us
-; 243  : 	IoDeleteSymbolicLink(&dos);
+; 200  : 	UNREFERENCED_PARAMETER(DeviceObject);
+; 201  : 
+; 202  : 	IoCompleteRequest(Irp, IO_NO_INCREMENT);
 
-  00009	48 8d 0d 00 00
-	00 00		 lea	 rcx, OFFSET FLAT:dos
-  00010	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_IoDeleteSymbolicLink
+  00009	33 d2		 xor	 edx, edx
+  0000b	48 8b cb	 mov	 rcx, rbx
+  0000e	ff 15 00 00 00
+	00		 call	 QWORD PTR __imp_IofCompleteRequest
 
-; 244  : 	IoDeleteDevice(DriverObject->DeviceObject);
+; 203  : 	return Irp->IoStatus.Status;
 
-  00016	48 8b 4b 08	 mov	 rcx, QWORD PTR [rbx+8]
-  0001a	ff 15 00 00 00
-	00		 call	 QWORD PTR __imp_IoDeleteDevice
+  00014	8b 43 30	 mov	 eax, DWORD PTR [rbx+48]
 
-; 245  : 
-; 246  : 	return STATUS_SUCCESS;
+; 204  : }
 
-  00020	33 c0		 xor	 eax, eax
+  00017	48 83 c4 20	 add	 rsp, 32			; 00000020H
+  0001b	5b		 pop	 rbx
+  0001c	c3		 ret	 0
+CloseDispatch ENDP
+_TEXT	ENDS
+; Function compile flags: /Ogsp
+; File c:\users\finn\documents\github\hardware_spoofer\disk\main.c
+;	COMDAT CreateDispatch
+_TEXT	SEGMENT
+DeviceObject$ = 48
+Irp$ = 56
+CreateDispatch PROC					; COMDAT
 
-; 247  : }
+; 190  : {
 
-  00022	48 83 c4 20	 add	 rsp, 32			; 00000020H
-  00026	5b		 pop	 rbx
-  00027	c3		 ret	 0
-DriverUnload ENDP
+$LN4:
+  00000	40 53		 push	 rbx
+  00002	48 83 ec 20	 sub	 rsp, 32			; 00000020H
+  00006	48 8b da	 mov	 rbx, rdx
+
+; 191  : 	UNREFERENCED_PARAMETER(DeviceObject);
+; 192  : 
+; 193  : 	IoCompleteRequest(Irp, IO_NO_INCREMENT);
+
+  00009	33 d2		 xor	 edx, edx
+  0000b	48 8b cb	 mov	 rcx, rbx
+  0000e	ff 15 00 00 00
+	00		 call	 QWORD PTR __imp_IofCompleteRequest
+
+; 194  : 	return Irp->IoStatus.Status;
+
+  00014	8b 43 30	 mov	 eax, DWORD PTR [rbx+48]
+
+; 195  : }
+
+  00017	48 83 c4 20	 add	 rsp, 32			; 00000020H
+  0001b	5b		 pop	 rbx
+  0001c	c3		 ret	 0
+CreateDispatch ENDP
+_TEXT	ENDS
+; Function compile flags: /Ogsp
+; File c:\users\finn\documents\github\hardware_spoofer\disk\main.c
+;	COMDAT UnsupportedDispatch
+_TEXT	SEGMENT
+DeviceObject$ = 48
+Irp$ = 56
+UnsupportedDispatch PROC				; COMDAT
+
+; 178  : {
+
+$LN4:
+  00000	40 53		 push	 rbx
+  00002	48 83 ec 20	 sub	 rsp, 32			; 00000020H
+  00006	48 8b da	 mov	 rbx, rdx
+
+; 179  : 	UNREFERENCED_PARAMETER(DeviceObject);
+; 180  : 
+; 181  : 	Irp->IoStatus.Status = STATUS_NOT_SUPPORTED;
+
+  00009	c7 42 30 bb 00
+	00 c0		 mov	 DWORD PTR [rdx+48], -1073741637 ; ffffffffc00000bbH
+
+; 182  : 	IoCompleteRequest(Irp, IO_NO_INCREMENT);
+
+  00010	48 8b cb	 mov	 rcx, rbx
+  00013	33 d2		 xor	 edx, edx
+  00015	ff 15 00 00 00
+	00		 call	 QWORD PTR __imp_IofCompleteRequest
+
+; 183  : 	return Irp->IoStatus.Status;
+
+  0001b	8b 43 30	 mov	 eax, DWORD PTR [rbx+48]
+
+; 184  : }
+
+  0001e	48 83 c4 20	 add	 rsp, 32			; 00000020H
+  00022	5b		 pop	 rbx
+  00023	c3		 ret	 0
+UnsupportedDispatch ENDP
+_TEXT	ENDS
+; Function compile flags: /Ogsp
+; File c:\users\finn\documents\github\hardware_spoofer\disk\main.c
+; File c:\program files (x86)\windows kits\10\include\10.0.17134.0\km\wdm.h
+; File c:\users\finn\documents\github\hardware_spoofer\disk\main.c
+;	COMDAT DiskDriverDispatch
+_TEXT	SEGMENT
+DeviceObject$ = 48
+Irp$ = 56
+DiskDriverDispatch PROC					; COMDAT
+
+; 125  : {
+
+$LN12:
+  00000	48 89 5c 24 08	 mov	 QWORD PTR [rsp+8], rbx
+  00005	48 89 6c 24 10	 mov	 QWORD PTR [rsp+16], rbp
+  0000a	48 89 74 24 18	 mov	 QWORD PTR [rsp+24], rsi
+  0000f	57		 push	 rdi
+  00010	48 83 ec 20	 sub	 rsp, 32			; 00000020H
+; File c:\program files (x86)\windows kits\10\include\10.0.17134.0\km\wdm.h
+
+; 30868:     return Irp->Tail.Overlay.CurrentStackLocation;
+
+  00014	48 8b ba b8 00
+	00 00		 mov	 rdi, QWORD PTR [rdx+184]
+; File c:\users\finn\documents\github\hardware_spoofer\disk\main.c
+
+; 125  : {
+
+  0001b	48 8b f2	 mov	 rsi, rdx
+  0001e	48 8b e9	 mov	 rbp, rcx
+
+; 126  : 	PIO_STACK_LOCATION Io = IoGetCurrentIrpStackLocation(Irp);
+; 127  : 
+; 128  : 	switch (Io->Parameters.DeviceIoControl.IoControlCode)
+
+  00021	8b 47 18	 mov	 eax, DWORD PTR [rdi+24]
+  00024	3d 88 c0 07 00	 cmp	 eax, 508040		; 0007c088H
+  00029	74 4b		 je	 SHORT $LN6@DiskDriver
+  0002b	3d 00 14 2d 00	 cmp	 eax, 2954240		; 002d1400H
+  00030	75 73		 jne	 SHORT $LN2@DiskDriver
+
+; 129  : 	{
+; 130  : 	case IOCTL_STORAGE_QUERY_PROPERTY:
+; 131  : 	{
+; 132  : 		PSTORAGE_PROPERTY_QUERY query = (PSTORAGE_PROPERTY_QUERY)Irp->AssociatedIrp.SystemBuffer;
+; 133  : 
+; 134  : 		if (query->PropertyId == StorageDeviceProperty)
+
+  00032	48 8b 42 18	 mov	 rax, QWORD PTR [rdx+24]
+  00036	83 38 00	 cmp	 DWORD PTR [rax], 0
+  00039	75 6a		 jne	 SHORT $LN2@DiskDriver
+
+; 135  : 		{
+; 136  : 			Io->Control = 0;
+; 137  : 			Io->Control |= SL_INVOKE_ON_SUCCESS;
+; 138  : 
+; 139  : 			PVOID OldContext = Io->Context;
+
+  0003b	48 8b 5f 40	 mov	 rbx, QWORD PTR [rdi+64]
+
+; 140  : 			Io->Context = (PVOID)ExAllocatePool(NonPagedPool, sizeof(REQUEST_STRUCT));
+
+  0003f	ba 20 00 00 00	 mov	 edx, 32			; 00000020H
+  00044	33 c9		 xor	 ecx, ecx
+  00046	c6 47 03 40	 mov	 BYTE PTR [rdi+3], 64	; 00000040H
+  0004a	ff 15 00 00 00
+	00		 call	 QWORD PTR __imp_ExAllocatePool
+
+; 141  : 			REQUEST_STRUCT *pRequest = (REQUEST_STRUCT*)Io->Context;
+; 142  : 			pRequest->OldRoutine = Io->CompletionRoutine;
+
+  00050	48 8b 4f 38	 mov	 rcx, QWORD PTR [rdi+56]
+  00054	48 89 47 40	 mov	 QWORD PTR [rdi+64], rax
+  00058	48 89 08	 mov	 QWORD PTR [rax], rcx
+
+; 143  : 			pRequest->OldContext = OldContext;
+
+  0005b	48 89 58 08	 mov	 QWORD PTR [rax+8], rbx
+
+; 144  : 			pRequest->OutputBufferLength = Io->Parameters.DeviceIoControl.OutputBufferLength;
+
+  0005f	8b 4f 08	 mov	 ecx, DWORD PTR [rdi+8]
+  00062	89 48 10	 mov	 DWORD PTR [rax+16], ecx
+
+; 145  : 			pRequest->StorageDescriptor = (PSTORAGE_DEVICE_DESCRIPTOR)Irp->AssociatedIrp.SystemBuffer;
+
+  00065	48 8b 4e 18	 mov	 rcx, QWORD PTR [rsi+24]
+  00069	48 89 48 18	 mov	 QWORD PTR [rax+24], rcx
+
+; 146  : 
+; 147  : 			Io->CompletionRoutine = (PIO_COMPLETION_ROUTINE)StorageQueryCompletionRoutine;
+
+  0006d	48 8d 05 00 00
+	00 00		 lea	 rax, OFFSET FLAT:StorageQueryCompletionRoutine
+
+; 148  : 		}
+; 149  : 
+; 150  : 		break;
+
+  00074	eb 2b		 jmp	 SHORT $LN10@DiskDriver
+$LN6@DiskDriver:
+
+; 151  : 
+; 152  : 	}
+; 153  : 
+; 154  : 	case SMART_RCV_DRIVE_DATA:
+; 155  : 	{
+; 156  : 		Io->Control = 0;
+; 157  : 		Io->Control |= SL_INVOKE_ON_SUCCESS;
+; 158  : 
+; 159  : 		PVOID OldContext = Io->Context;
+
+  00076	48 8b 5f 40	 mov	 rbx, QWORD PTR [rdi+64]
+
+; 160  : 		Io->Context = (PVOID)ExAllocatePool(NonPagedPool, sizeof(REQUEST_STRUCT));
+
+  0007a	ba 20 00 00 00	 mov	 edx, 32			; 00000020H
+  0007f	33 c9		 xor	 ecx, ecx
+  00081	c6 47 03 40	 mov	 BYTE PTR [rdi+3], 64	; 00000040H
+  00085	ff 15 00 00 00
+	00		 call	 QWORD PTR __imp_ExAllocatePool
+
+; 161  : 		REQUEST_STRUCT *pRequest = (REQUEST_STRUCT*)Io->Context;
+; 162  : 		pRequest->OldRoutine = Io->CompletionRoutine;
+
+  0008b	48 8b 4f 38	 mov	 rcx, QWORD PTR [rdi+56]
+  0008f	48 89 47 40	 mov	 QWORD PTR [rdi+64], rax
+  00093	48 89 08	 mov	 QWORD PTR [rax], rcx
+
+; 163  : 		pRequest->OldContext = OldContext;
+
+  00096	48 89 58 08	 mov	 QWORD PTR [rax+8], rbx
+
+; 164  : 
+; 165  : 		Io->CompletionRoutine = (PIO_COMPLETION_ROUTINE)SmartCompletionRoutine;
+
+  0009a	48 8d 05 00 00
+	00 00		 lea	 rax, OFFSET FLAT:SmartCompletionRoutine
+$LN10@DiskDriver:
+
+; 166  : 
+; 167  : 		break;
+; 168  : 	}
+; 169  : 	}
+; 170  : 
+; 171  : 	return RealDiskDeviceControl(DeviceObject, Irp);
+
+  000a1	48 89 47 38	 mov	 QWORD PTR [rdi+56], rax
+$LN2@DiskDriver:
+  000a5	48 8b d6	 mov	 rdx, rsi
+  000a8	48 8b cd	 mov	 rcx, rbp
+
+; 172  : }
+
+  000ab	48 8b 5c 24 30	 mov	 rbx, QWORD PTR [rsp+48]
+  000b0	48 8b 6c 24 38	 mov	 rbp, QWORD PTR [rsp+56]
+  000b5	48 8b 74 24 40	 mov	 rsi, QWORD PTR [rsp+64]
+  000ba	48 83 c4 20	 add	 rsp, 32			; 00000020H
+  000be	5f		 pop	 rdi
+
+; 166  : 
+; 167  : 		break;
+; 168  : 	}
+; 169  : 	}
+; 170  : 
+; 171  : 	return RealDiskDeviceControl(DeviceObject, Irp);
+
+  000bf	48 ff 25 00 00
+	00 00		 rex_jmp QWORD PTR RealDiskDeviceControl
+DiskDriverDispatch ENDP
+_TEXT	ENDS
+; Function compile flags: /Ogsp
+; File c:\users\finn\documents\github\hardware_spoofer\disk\main.c
+;	COMDAT SmartCompletionRoutine
+_TEXT	SEGMENT
+DeviceObject$ = 48
+Irp$ = 56
+Context$ = 64
+SmartCompletionRoutine PROC				; COMDAT
+
+; 105  : {
+
+$LN5:
+  00000	40 53		 push	 rbx
+  00002	48 83 ec 20	 sub	 rsp, 32			; 00000020H
+  00006	48 8b da	 mov	 rbx, rdx
+
+; 106  : 	UNREFERENCED_PARAMETER(DeviceObject);
+; 107  : 
+; 108  : 	PIO_COMPLETION_ROUTINE OldCompletionRoutine = NULL;
+; 109  : 	PVOID OldContext = NULL;
+; 110  : 
+; 111  : 	if (Context != NULL)
+
+  00009	4d 85 c0	 test	 r8, r8
+  0000c	74 0b		 je	 SHORT $LN2@SmartCompl
+
+; 112  : 	{
+; 113  : 		REQUEST_STRUCT* pRequest = (REQUEST_STRUCT*)Context;
+; 114  : 		OldCompletionRoutine = pRequest->OldRoutine;
+; 115  : 		OldContext = pRequest->OldContext;
+; 116  : 		ExFreePool(Context);
+
+  0000e	33 d2		 xor	 edx, edx
+  00010	49 8b c8	 mov	 rcx, r8
+  00013	ff 15 00 00 00
+	00		 call	 QWORD PTR __imp_ExFreePoolWithTag
+$LN2@SmartCompl:
+
+; 117  : 	}
+; 118  : 
+; 119  : 	Irp->IoStatus.Status = STATUS_NOT_SUPPORTED;
+
+  00019	b8 bb 00 00 c0	 mov	 eax, -1073741637	; ffffffffc00000bbH
+  0001e	89 43 30	 mov	 DWORD PTR [rbx+48], eax
+
+; 120  : 
+; 121  : 	return Irp->IoStatus.Status;
+; 122  : }
+
+  00021	48 83 c4 20	 add	 rsp, 32			; 00000020H
+  00025	5b		 pop	 rbx
+  00026	c3		 ret	 0
+SmartCompletionRoutine ENDP
+_TEXT	ENDS
+; Function compile flags: /Ogsp
+; File c:\users\finn\documents\github\hardware_spoofer\disk\main.c
+;	COMDAT StorageQueryCompletionRoutine
+_TEXT	SEGMENT
+DeviceObject$ = 64
+Irp$ = 72
+Context$ = 80
+StorageQueryCompletionRoutine PROC			; COMDAT
+
+; 74   : {
+
+$LN7:
+  00000	48 89 5c 24 08	 mov	 QWORD PTR [rsp+8], rbx
+  00005	48 89 6c 24 10	 mov	 QWORD PTR [rsp+16], rbp
+  0000a	48 89 74 24 18	 mov	 QWORD PTR [rsp+24], rsi
+  0000f	57		 push	 rdi
+  00010	41 56		 push	 r14
+  00012	41 57		 push	 r15
+  00014	48 83 ec 20	 sub	 rsp, 32			; 00000020H
+  00018	48 8b da	 mov	 rbx, rdx
+  0001b	4c 8b f1	 mov	 r14, rcx
+
+; 75   : 	PIO_COMPLETION_ROUTINE OldCompletionRoutine = NULL;
+; 76   : 	PVOID OldContext = NULL;
+; 77   : 	ULONG OutputBufferLength = 0;
+; 78   : 	PSTORAGE_DEVICE_DESCRIPTOR descriptor = NULL;
+; 79   : 
+; 80   : 	if (Context != NULL)
+
+  0001e	4d 85 c0	 test	 r8, r8
+  00021	74 4b		 je	 SHORT $LN4@StorageQue
+
+; 81   : 	{
+; 82   : 		REQUEST_STRUCT* pRequest = (REQUEST_STRUCT*)Context;
+; 83   : 		OldCompletionRoutine = pRequest->OldRoutine;
+
+  00023	49 8b 38	 mov	 rdi, QWORD PTR [r8]
+
+; 84   : 		OldContext = pRequest->OldContext;
+; 85   : 		OutputBufferLength = pRequest->OutputBufferLength;
+; 86   : 		descriptor = pRequest->StorageDescriptor;
+; 87   : 
+; 88   : 		ExFreePool(Context);
+
+  00026	33 d2		 xor	 edx, edx
+  00028	4d 8b 78 08	 mov	 r15, QWORD PTR [r8+8]
+  0002c	49 8b c8	 mov	 rcx, r8
+  0002f	41 8b 68 10	 mov	 ebp, DWORD PTR [r8+16]
+  00033	49 8b 70 18	 mov	 rsi, QWORD PTR [r8+24]
+  00037	ff 15 00 00 00
+	00		 call	 QWORD PTR __imp_ExFreePoolWithTag
+
+; 89   : 	}
+; 90   : 
+; 91   : 	if (FIELD_OFFSET(STORAGE_DEVICE_DESCRIPTOR, SerialNumberOffset) < OutputBufferLength && descriptor->SerialNumberOffset > 0 && descriptor->SerialNumberOffset < OutputBufferLength)
+
+  0003d	83 fd 18	 cmp	 ebp, 24
+  00040	76 14		 jbe	 SHORT $LN3@StorageQue
+  00042	8b 46 18	 mov	 eax, DWORD PTR [rsi+24]
+  00045	85 c0		 test	 eax, eax
+  00047	74 0d		 je	 SHORT $LN3@StorageQue
+  00049	3b c5		 cmp	 eax, ebp
+  0004b	73 09		 jae	 SHORT $LN3@StorageQue
+
+; 92   : 	{
+; 93   : 		char* SerialNumber = ((char*)descriptor) + descriptor->SerialNumberOffset;
+
+  0004d	48 8d 0c 06	 lea	 rcx, QWORD PTR [rsi+rax]
+
+; 94   : 
+; 95   : 		SpoofSerialNumber(SerialNumber);
+
+  00051	e8 00 00 00 00	 call	 SpoofSerialNumber
+$LN3@StorageQue:
+
+; 96   : 	}
+; 97   : 
+; 98   : 	if ((Irp->StackCount >(ULONG)1) && (OldCompletionRoutine != NULL))
+
+  00056	48 85 ff	 test	 rdi, rdi
+  00059	74 13		 je	 SHORT $LN4@StorageQue
+  0005b	80 7b 42 01	 cmp	 BYTE PTR [rbx+66], 1
+  0005f	76 0d		 jbe	 SHORT $LN4@StorageQue
+
+; 99   : 		return OldCompletionRoutine(DeviceObject, Irp, OldContext);
+
+  00061	4d 8b c7	 mov	 r8, r15
+  00064	48 8b d3	 mov	 rdx, rbx
+  00067	49 8b ce	 mov	 rcx, r14
+  0006a	ff d7		 call	 rdi
+  0006c	eb 02		 jmp	 SHORT $LN1@StorageQue
+$LN4@StorageQue:
+
+; 100  : 
+; 101  : 	return STATUS_SUCCESS;
+
+  0006e	33 c0		 xor	 eax, eax
+$LN1@StorageQue:
+
+; 102  : }
+
+  00070	48 8b 5c 24 40	 mov	 rbx, QWORD PTR [rsp+64]
+  00075	48 8b 6c 24 48	 mov	 rbp, QWORD PTR [rsp+72]
+  0007a	48 8b 74 24 50	 mov	 rsi, QWORD PTR [rsp+80]
+  0007f	48 83 c4 20	 add	 rsp, 32			; 00000020H
+  00083	41 5f		 pop	 r15
+  00085	41 5e		 pop	 r14
+  00087	5f		 pop	 rdi
+  00088	c3		 ret	 0
+StorageQueryCompletionRoutine ENDP
+_TEXT	ENDS
+; Function compile flags: /Ogsp
+; File c:\users\finn\documents\github\hardware_spoofer\disk\main.c
+;	COMDAT SpoofSerialNumber
+_TEXT	SEGMENT
+serialNumber$ = 48
+tv193 = 56
+Seed$1 = 56
+SpoofSerialNumber PROC					; COMDAT
+
+; 45   : {
+
+$LN15:
+  00000	40 53		 push	 rbx
+  00002	48 83 ec 20	 sub	 rsp, 32			; 00000020H
+
+; 46   : 	if (!HWIDGenerated)
+
+  00006	83 3d 00 00 00
+	00 00		 cmp	 DWORD PTR HWIDGenerated, 0
+  0000d	48 8b d9	 mov	 rbx, rcx
+  00010	75 45		 jne	 SHORT $LN5@SpoofSeria
+
+; 47   : 	{
+; 48   : 		HWIDGenerated = 1;
+; 49   : 
+; 50   : 		LARGE_INTEGER Seed;
+; 51   : 		KeQuerySystemTimePrecise(&Seed);
+
+  00012	48 8d 4c 24 38	 lea	 rcx, QWORD PTR Seed$1[rsp]
+  00017	c7 05 00 00 00
+	00 01 00 00 00	 mov	 DWORD PTR HWIDGenerated, 1
+  00021	ff 15 00 00 00
+	00		 call	 QWORD PTR __imp_KeQuerySystemTimePrecise
+
+; 52   : 
+; 53   : 		for (int i = 0; i < strlen(SpoofedHWID); ++i)
+
+  00027	48 8d 0d 00 00
+	00 00		 lea	 rcx, OFFSET FLAT:SpoofedHWID
+  0002e	48 83 c8 ff	 or	 rax, -1
+$LL13@SpoofSeria:
+  00032	48 ff c0	 inc	 rax
+  00035	80 3c 01 00	 cmp	 BYTE PTR [rcx+rax], 0
+  00039	75 f7		 jne	 SHORT $LL13@SpoofSeria
+
+; 54   : 		{
+; 55   : 
+; 56   : 			if (SpoofedHWID[i] == 'ABC')
+; 57   : 			{
+; 58   : 				SpoofedHWID[i] = RtlRandomEx(&Seed.LowPart) % 26 + 65;
+; 59   : 
+; 60   : 			}
+; 61   : 
+; 62   : 			if (SpoofedHWID[i] == 'DEF')
+; 63   : 			{
+; 64   : 				SpoofedHWID[i] = NumTable[RtlRandomEx(&Seed.LowPart) % (strlen(NumTable) - 1)];
+; 65   : 			}
+; 66   : 		}
+; 67   : 
+; 68   : 		RtlCopyMemory((void*)serialNumber, (void*)SpoofedHWID, 21);
+
+  0003b	0f 10 05 00 00
+	00 00		 movups	 xmm0, XMMWORD PTR SpoofedHWID
+  00042	0f 11 03	 movups	 XMMWORD PTR [rbx], xmm0
+  00045	8b 05 10 00 00
+	00		 mov	 eax, DWORD PTR SpoofedHWID+16
+  0004b	89 43 10	 mov	 DWORD PTR [rbx+16], eax
+  0004e	8a 05 14 00 00
+	00		 mov	 al, BYTE PTR SpoofedHWID+20
+  00054	88 43 14	 mov	 BYTE PTR [rbx+20], al
+$LN5@SpoofSeria:
+
+; 69   : 	}
+; 70   : 	return STATUS_SUCCESS;
+
+  00057	33 c0		 xor	 eax, eax
+
+; 71   : }
+
+  00059	48 83 c4 20	 add	 rsp, 32			; 00000020H
+  0005d	5b		 pop	 rbx
+  0005e	c3		 ret	 0
+SpoofSerialNumber ENDP
+_TEXT	ENDS
+; Function compile flags: /Ogsp
+; File c:\users\finn\documents\github\hardware_spoofer\disk\main.c
+;	COMDAT GetDriverObject
+_TEXT	SEGMENT
+DriverName$ = 80
+DrvObject$ = 88
+GetDriverObject PROC					; COMDAT
+
+; 31   : {
+
+$LN5:
+  00000	4c 8b dc	 mov	 r11, rsp
+  00003	53		 push	 rbx
+  00004	48 83 ec 40	 sub	 rsp, 64			; 00000040H
+
+; 32   : 	PDRIVER_OBJECT DrvObject;
+; 33   : 	if (NT_SUCCESS(ObReferenceObjectByName(DriverName, 0, NULL, 0, *IoDriverObjectType, KernelMode, NULL, &DrvObject)))
+
+  00008	48 8b 05 00 00
+	00 00		 mov	 rax, QWORD PTR __imp_IoDriverObjectType
+  0000f	49 8d 53 10	 lea	 rdx, QWORD PTR [r11+16]
+  00013	49 89 53 f0	 mov	 QWORD PTR [r11-16], rdx
+  00017	33 db		 xor	 ebx, ebx
+  00019	49 89 5b e8	 mov	 QWORD PTR [r11-24], rbx
+  0001d	45 33 c9	 xor	 r9d, r9d
+  00020	88 5c 24 28	 mov	 BYTE PTR [rsp+40], bl
+  00024	45 33 c0	 xor	 r8d, r8d
+  00027	48 8b 00	 mov	 rax, QWORD PTR [rax]
+  0002a	33 d2		 xor	 edx, edx
+  0002c	48 8b 00	 mov	 rax, QWORD PTR [rax]
+  0002f	49 89 43 d8	 mov	 QWORD PTR [r11-40], rax
+  00033	ff 15 00 00 00
+	00		 call	 QWORD PTR __imp_ObReferenceObjectByName
+  00039	85 c0		 test	 eax, eax
+  0003b	48 0f 49 5c 24
+	58		 cmovns	 rbx, QWORD PTR DrvObject$[rsp]
+  00041	48 8b c3	 mov	 rax, rbx
+
+; 34   : 	{
+; 35   : 		return DrvObject;
+; 36   : 	}
+; 37   : 
+; 38   : 	return NULL;
+; 39   : }
+
+  00044	48 83 c4 40	 add	 rsp, 64			; 00000040H
+  00048	5b		 pop	 rbx
+  00049	c3		 ret	 0
+GetDriverObject ENDP
 _TEXT	ENDS
 ; Function compile flags: /Ogsp
 ; File c:\program files (x86)\windows kits\10\include\10.0.17134.0\km\wdm.h
